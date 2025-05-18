@@ -72,7 +72,9 @@ dependencies {
     //DI
     implementation(libs.android.hilt)
     ksp(libs.android.hilt.compiler)
+
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.navigation.compose)
 
     //Network
     implementation(libs.retrofit)

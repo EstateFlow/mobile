@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ua.nure.estateflow.data.datasource.auth.AuthDataSource
+import ua.nure.estateflow.data.datasource.auth.AuthDataSourceImpl
 import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
 import javax.inject.Singleton
@@ -20,4 +22,9 @@ object DataSourceModule {
     ) : TokenDataSource = TokenDataSourceImpl(
         sharedPreferences = sharedPreferences
     )
+
+    @Provides
+    fun provideAuthDataSource(
+    ): AuthDataSource = AuthDataSourceImpl()
+
 }
