@@ -9,6 +9,7 @@ import ua.nure.estateflow.data.datasource.auth.AuthDataSource
 import ua.nure.estateflow.data.datasource.auth.AuthDataSourceImpl
 import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
+import ua.nure.estateflow.data.remote.auth.AuthApi
 import javax.inject.Singleton
 
 
@@ -25,6 +26,7 @@ object DataSourceModule {
 
     @Provides
     fun provideAuthDataSource(
-    ): AuthDataSource = AuthDataSourceImpl()
+        authApi: AuthApi
+    ): AuthDataSource = AuthDataSourceImpl(authApi = authApi)
 
 }

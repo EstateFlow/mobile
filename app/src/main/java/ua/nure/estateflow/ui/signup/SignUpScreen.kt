@@ -63,7 +63,7 @@ fun SignUpScreen(
                 }
 
                 is SignUp.Event.OnNavigate -> {
-//                    navController.navigate(it.destination)
+                    navController.navigate(it.destination)
                 }
             }
         }
@@ -174,8 +174,7 @@ fun SignUpScreenContent(
 fun SignUpScreenPreview(modifier: Modifier = Modifier) {
     val state = remember {
         mutableStateOf(
-            SignUp.State(
-            )
+            SignUp.State()
         )
     }
     SignUpScreenContent(
