@@ -151,7 +151,7 @@ fun SignUpScreenContent(
             value = confirmPassword,
             label = R.string.confirmPassword,
             onValueChange = {
-                onAction(SignUp.Action.onConfirmPasswordChanged(it))
+                onAction(SignUp.Action.onConfirmPasswordChanged(it)) 
             }
         )
         Spacer(

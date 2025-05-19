@@ -5,4 +5,8 @@
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm password</string>
     <string name="getStarted">Get started</string>
+    <string name="forgotPassword">Forgot password?</string>
+    <string name="getGoing">Get going</string>
+    <string name="continueWithGoogle">Continue with Google</string>
+    <string name="dontHaveAnAccount">Don\'t have an acoount?</string>
 </resources>

@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 sealed class Screen {
     @Serializable data object  SignUp : Screen()
     @Serializable data object  SignIn : Screen()
+    @Serializable data object  RestorePassword : Screen()
 }

@@ -27,6 +27,7 @@ class SignInViewModel @Inject constructor(
             is SignIn.Action.OnNavigate -> TODO()
             is SignIn.Action.onLoginChanged -> TODO()
             is SignIn.Action.onPasswordChanged -> TODO()
+            SignIn.Action.OnGoogleLogin -> TODO()
         }
     }
 }
