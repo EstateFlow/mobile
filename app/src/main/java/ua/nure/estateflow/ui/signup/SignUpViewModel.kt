@@ -26,6 +26,8 @@ class SignUpViewModel @Inject constructor(
             SignUp.Action.OnRegister -> TODO()
             is SignUp.Action.onNameChanged -> TODO()
             is SignUp.Action.onPasswordChanged -> TODO()
+            is SignUp.Action.onLoginChanged -> TODO()
+            is SignUp.Action.onConfirmPasswordChanged -> TODO()
         }
     }
 
