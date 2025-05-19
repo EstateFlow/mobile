@@ -149,7 +149,7 @@ fun SignUpScreenContent(
                 .fillMaxWidth(),
             isPassword = true,
             value = confirmPassword,
-            label = R.string.login,
+            label = R.string.confirmPassword,
             onValueChange = {
                 onAction(SignUp.Action.onConfirmPasswordChanged(it))
             }
