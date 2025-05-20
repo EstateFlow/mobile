@@ -19,7 +19,7 @@ fun NavGraph(
     NavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
-        startDestination = Screen.SignUp
+        startDestination = Screen.SignIn
     ) {
         composable<Screen.SignUp> {
             SignUpScreen(
@@ -33,5 +33,7 @@ fun NavGraph(
                 navController = navController
             )
         }
+
+        mainGraph(navController = navController)
     }
 }

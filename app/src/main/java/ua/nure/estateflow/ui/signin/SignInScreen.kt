@@ -1,5 +1,6 @@
 package ua.nure.estateflow.ui.signin
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,6 +42,8 @@ import ua.nure.estateflow.ui.theme.DescriptionTextColor
 import ua.nure.estateflow.ui.theme.FocusedTextColor
 import ua.nure.estateflow.ui.theme.HelpingTextColor
 
+private val TAG = "SignInScreen"
+
 @Composable
 fun SignInScreen(
     viewModel: SignInViewModel,
@@ -52,7 +55,10 @@ fun SignInScreen(
         viewModel.event.collect {
             when(it) {
                 is SignIn.Event.OnMessage -> Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                is SignIn.Event.OnNavigate -> navController.navigate(it.destination)
+                is SignIn.Event.OnNavigate -> {
+                    Log.d(TAG, "SignInScreen: ${it.destination}")
+                    navController.navigate(it.destination)
+                }
             }
         }
     }
