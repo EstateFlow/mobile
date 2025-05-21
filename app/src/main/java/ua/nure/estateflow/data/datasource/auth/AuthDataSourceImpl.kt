@@ -10,6 +10,7 @@ import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.auth.dto.AuthRequest
 import ua.nure.estateflow.data.remote.parseError
+import java.io.InterruptedIOException
 import kotlin.math.log
 
 class AuthDataSourceImpl(
@@ -47,28 +48,33 @@ class AuthDataSourceImpl(
 
     override suspend fun signIn(login: String, password: String): Flow<DataSourceResponse<Any>> = flow {
         emit(DataSourceResponse.InProgress)
-        authApi.signIn(
-            body = AuthRequest(
-                login = login,
-                password = password
-            )
-        ).run {
-            when {
-                isSuccessful -> {
-                    body()?.let {
-                        tokenDataSource.setToken(it.accessToken)
-                        profileDataSource.setProfile(
-                            Profile(
-                                login = login
+        try {
+            authApi.signIn(
+                body = AuthRequest(
+                    login = login,
+                    password = password
+                )
+            ).run {
+                when {
+                    isSuccessful -> {
+                        body()?.let {
+                            tokenDataSource.setToken(it.accessToken)
+                            profileDataSource.setProfile(
+                                Profile(
+                                    login = login
+                                )
                             )
-                        )
-                        emit(DataSourceResponse.Success())
+                            emit(DataSourceResponse.Success())
+                        }
+                    }
+                    else -> {
+                        emit(parseError(errorBody = errorBody()))
                     }
                 }
-                else -> {
-                    emit(parseError(errorBody = errorBody()))
-                }
             }
+        }
+        catch (ex: InterruptedIOException) {
+            emit(DataSourceResponse.Error<String>(message = "Server is down"))
         }
     }
 

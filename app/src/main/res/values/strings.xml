@@ -9,4 +9,5 @@
     <string name="getGoing">Get going</string>
     <string name="continueWithGoogle">Continue with Google</string>
     <string name="dontHaveAnAccount">Don\'t have an acoount?</string>
+    <string name="askAI">Not sure? Ask AI</string>
 </resources>

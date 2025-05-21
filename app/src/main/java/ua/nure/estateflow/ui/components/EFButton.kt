@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,25 +31,27 @@ fun EFButton(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     @DrawableRes image: Int? = null,
+    backgroundColor: Color = ButtonColor,
+    textColor: Color = ButtonTextColor,
     onClick: () -> Unit
 ) {
     Button(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors().copy(
-            containerColor = ButtonColor
+            containerColor = backgroundColor
         ),
         onClick = {
             onClick()
         }
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier,
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = stringResource(label),
-                color = ButtonTextColor
+                color = textColor
             )
             image?.let {
                 Image(
