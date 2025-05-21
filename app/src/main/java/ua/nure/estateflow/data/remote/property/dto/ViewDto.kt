@@ -1,6 +1,7 @@
 package ua.nure.estateflow.data.remote.property.dto
 
 import com.google.gson.annotations.SerializedName
+import ua.nure.estateflow.data.local.entity.ViewEntity
 
 data class ViewDto(
     @SerializedName("id") val id : String,
@@ -8,3 +9,11 @@ data class ViewDto(
     @SerializedName("viewedAt") val viewedAt : String,
     @SerializedName("viewerIp") val viewerIp : String,
 )
+
+fun ViewDto.toEntity() =
+    ViewEntity(
+        id = id,
+        propertyId = propertyId,
+        viewedAt = viewedAt,
+        viewerIp = viewerIp,
+        )

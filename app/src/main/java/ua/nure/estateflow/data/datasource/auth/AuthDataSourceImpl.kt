@@ -3,6 +3,8 @@ package ua.nure.estateflow.data.datasource.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ua.nure.estateflow.data.datasource.DataSourceResponse
+import ua.nure.estateflow.data.datasource.profile.Profile
+import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
 import ua.nure.estateflow.data.remote.auth.AuthApi
@@ -12,8 +14,8 @@ import kotlin.math.log
 
 class AuthDataSourceImpl(
     private val authApi: AuthApi,
-    private val tokenDataSource: TokenDataSource
-
+    private val tokenDataSource: TokenDataSource,
+    private val profileDataSource: ProfileDataSource,
 ) : AuthDataSource {
     override suspend fun signUp(
         name: String,
@@ -55,6 +57,11 @@ class AuthDataSourceImpl(
                 isSuccessful -> {
                     body()?.let {
                         tokenDataSource.setToken(it.accessToken)
+                        profileDataSource.setProfile(
+                            Profile(
+                                login = login
+                            )
+                        )
                         emit(DataSourceResponse.Success())
                     }
                 }
