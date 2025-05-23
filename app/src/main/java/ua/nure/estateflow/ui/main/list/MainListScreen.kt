@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +29,7 @@ import ua.nure.estateflow.ui.components.EFFilter
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.signup.SignUp
+import ua.nure.estateflow.ui.theme.appDimensions
 
 private val TAG = "MainListScreen"
 
@@ -81,9 +83,14 @@ private fun MainListScreenContent(
 
         LazyColumn(
             modifier = Modifier
-                .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
+                .padding(
+                    start = MaterialTheme.appDimensions.NormalSpace,
+                    top = MaterialTheme.appDimensions.SmallSpace,
+                    bottom = MaterialTheme.appDimensions.SmallSpace,
+                    end = MaterialTheme.appDimensions.NormalSpace
+                )
                 .weight(1F),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.NormalSpace)
         ) {
             items(
                 items = state.value.properties,

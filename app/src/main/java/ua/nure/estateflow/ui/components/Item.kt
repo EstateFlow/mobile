@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,6 +30,9 @@ import coil3.request.ImageRequest
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.theme.Background
 import ua.nure.estateflow.ui.theme.DescriptionTextColor
+import ua.nure.estateflow.ui.theme.largeTextStyle
+import ua.nure.estateflow.ui.theme.regularTextStyle
+import ua.nure.estateflow.ui.theme.smallTextStyle
 
 @Composable
 fun Item(
@@ -65,15 +69,17 @@ fun Item(
         )
         Column(
             modifier = Modifier
-                .padding(8.dp),
-            verticalArrangement = Arrangement.SpaceEvenly,
+                .padding(8.dp)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.Start,
         ) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
                 color = DescriptionTextColor,
-                text = "$price $currency"
+                text = "$price $currency",
+                style = regularTextStyle
             )
             Text(
                 modifier = Modifier
@@ -81,19 +87,22 @@ fun Item(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 color = DescriptionTextColor,
-                text = address
+                text = address,
+                style = smallTextStyle
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
                 color = DescriptionTextColor,
-                text = "$rooms rooms"
+                text = "$rooms rooms",
+                style = smallTextStyle
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
                 color = DescriptionTextColor,
-                text = "$size m\u00B2"
+                text = "$size m\u00B2",
+                style = smallTextStyle
             )
         }
     }

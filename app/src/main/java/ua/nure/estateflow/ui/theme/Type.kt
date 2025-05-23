@@ -1,6 +1,7 @@
 package ua.nure.estateflow.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -31,4 +32,18 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+)
+
+val regularTextStyle = TextStyle(
+    fontSize = 16.sp,
+    fontWeight = FontWeight.Normal,
+    color = Color.White
+)
+
+val smallTextStyle = regularTextStyle.copy(
+    fontSize = 12.sp
+)
+
+val largeTextStyle = regularTextStyle.copy(
+    fontSize = 22.sp
 )

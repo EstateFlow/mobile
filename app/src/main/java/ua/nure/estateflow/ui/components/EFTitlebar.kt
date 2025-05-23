@@ -13,12 +13,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +29,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.theme.ToolBarColor
+import ua.nure.estateflow.ui.theme.appDimensions
 
 @Composable
 fun EFTitlebar(
@@ -44,7 +47,7 @@ fun EFTitlebar(
         modifier = modifier
             .fillMaxWidth()
             .background(ToolBarColor)
-            .padding(top = 32.dp)
+            .padding(top = 32.dp, bottom = 8.dp)
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
@@ -74,7 +77,7 @@ fun EFTitlebar(
         )
         AsyncImage(
             modifier = Modifier
-                .size(33.dp)
+                .size(MaterialTheme.appDimensions.IconSize)
                 .clip(CircleShape)
                 .clickable{
                     onProfile()
@@ -82,10 +85,12 @@ fun EFTitlebar(
             model = ImageRequest.Builder(context)
                 .data(imageURL)
                 .build(),
-            contentDescription = ""
+            contentDescription = "",
+            contentScale = ContentScale.FillBounds
         )
         Image(
             modifier = Modifier
+                .clip(shape = CircleShape)
                 .clickable {
                     onSearch()
                 },
@@ -94,6 +99,7 @@ fun EFTitlebar(
         )
         Image(
             modifier = Modifier
+                .clip(shape = CircleShape)
                 .clickable {
                     onAI()
                 },
