@@ -46,7 +46,7 @@ fun EFTextField(
                     unfocusedContainerColor = Color.White,
                     focusedTextColor = FocusedTextColor,
                     unfocusedTextColor = LabelTextColor,
-                    unfocusedLabelColor = Color.White,
+                    unfocusedLabelColor = FocusedTextColor,
 
                     ),
             label = {

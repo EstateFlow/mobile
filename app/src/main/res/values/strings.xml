@@ -10,4 +10,14 @@
     <string name="continueWithGoogle">Continue with Google</string>
     <string name="dontHaveAnAccount">Don\'t have an acoount?</string>
     <string name="askAI">Not sure? Ask AI</string>
+    <string name="search">Search</string>
+    <string name="rooms">Rooms</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="forRent">For rent</string>
+    <string name="forPurchase">For purchase</string>
+    <string name="price">Price</string>
+    <string name="area">Area</string>
+    <string name="house">House</string>
+    <string name="apartment">Apartment</string>
 </resources>
