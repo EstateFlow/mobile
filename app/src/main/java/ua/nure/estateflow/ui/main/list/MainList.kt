@@ -11,6 +11,7 @@ object MainList {
 
     sealed interface Action {
         data class OnNavigate(val destination: Screen): Action
+        data class OnSearch(val search: String): Action
     }
 
     data class State (

@@ -43,6 +43,8 @@ fun MainListScreen(
 ) {
     val context = LocalContext.current
     val state = viewModel.state.collectAsStateWithLifecycle()
+    val search = viewModel.search.collectAsStateWithLifecycle()
+
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collect {
             when (it) {
@@ -58,6 +60,7 @@ fun MainListScreen(
     }
     MainListScreenContent(
         state = state,
+        search = search.value,
         onAction = viewModel::onAction
     )
 }
@@ -65,9 +68,9 @@ fun MainListScreen(
 @Composable
 private fun MainListScreenContent(
     state: State<MainList.State>,
+    search: String = "",
     onAction: (MainList.Action) -> Unit
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -92,10 +95,12 @@ private fun MainListScreenContent(
 
         AnimatedVisibility(visible = isFilterActive) {
             EFFilter(
-                modifier = Modifier.padding(MaterialTheme.appDimensions.SmallSpace)
-            ) {
-
-            }
+                modifier = Modifier.padding(MaterialTheme.appDimensions.SmallSpace),
+                search = search,
+                onSearchChanged = {
+                    onAction(MainList.Action.OnSearch(search = it))
+                }
+            )
         }
 
         LazyColumn(

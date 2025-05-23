@@ -23,7 +23,7 @@ data class PropertyEntity(
     val rooms: Int,
     val address: String,
     val status: String,
-    val documentUrl: String? = null,
+    val documentUrl: String?,
     val verificationComments: String = "",
     val isVerified: Boolean,
     val createdAt: String,

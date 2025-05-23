@@ -17,7 +17,7 @@ import ua.nure.estateflow.data.local.entity.ViewEntity
         ImageEntity::class,
         ViewEntity::class
     ],
-    version = 2
+    version = 3
 )
 @TypeConverters(DbConverters::class)
 abstract class AppDb : RoomDatabase() {

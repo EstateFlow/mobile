@@ -1,5 +1,6 @@
 package ua.nure.estateflow.ui.main.list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -7,6 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.DataSourceResponse
@@ -17,15 +19,27 @@ import javax.inject.Inject
 class MainListViewModel @Inject constructor(
     private val propertyDataSource: PropertyDataSource,
 ) : ViewModel() {
+    private val TAG by lazy { MainListViewModel::class.simpleName }
+    val search = MutableStateFlow("")
     init {
         viewModelScope.launch {
-            propertyDataSource.get().collect { list ->
+            combine(
+                search,
+                propertyDataSource.get()
+            ) { search, list ->
                 _state.update {
                     it.copy(
-                        properties = list
+                        properties = list.filter { prop ->
+                            Log.d(TAG, "list: ${prop.propertyEntity.id} -> ${prop.propertyEntity.title}")
+                            if(search.isNotEmpty()) {
+                                prop.propertyEntity.title.contains(search, ignoreCase = true)
+                                        || prop.propertyEntity.address.contains(search, ignoreCase = true)
+                                        || prop.propertyEntity.description.contains(search, ignoreCase = true)
+                            } else true
+                        }
                     )
                 }
-            }
+            }.collect {}
         }
 
         viewModelScope.launch {
@@ -50,7 +64,12 @@ class MainListViewModel @Inject constructor(
 
     fun onAction(action: MainList.Action) = viewModelScope.launch {
         when(action) {
-            is MainList.Action.OnNavigate -> TODO()
+            is MainList.Action.OnNavigate -> {
+                _event.emit(MainList.Event.OnNavigate(destination = action.destination))
+            }
+            is MainList.Action.OnSearch -> {
+                search.value = action.search
+            }
         }
     }
 }
