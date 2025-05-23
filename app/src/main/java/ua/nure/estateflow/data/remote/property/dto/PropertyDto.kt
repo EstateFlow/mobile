@@ -18,7 +18,7 @@ data class PropertyDto(
     @SerializedName("rooms") val rooms: Int,
     @SerializedName("address") val address: String,
     @SerializedName("status") val status: String,
-    @SerializedName("documentUrl") val documentUrl: String,
+    @SerializedName("documentUrl") val documentUrl: String? = null,
     @SerializedName("verificationComments") val verificationComments: String?,
     @SerializedName("isVerified") val isVerified: Boolean,
     @SerializedName("createdAt") val createdAt: String,

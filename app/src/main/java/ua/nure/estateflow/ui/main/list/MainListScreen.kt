@@ -1,10 +1,13 @@
 package ua.nure.estateflow.ui.main.list
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,9 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.ui.components.EFFilter
+import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.signup.SignUp
 
+private val TAG = "MainListScreen"
 
 @Composable
 fun MainListScreen(
@@ -60,27 +65,23 @@ private fun MainListScreenContent(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = 32.dp,
-                start = 16.dp,
-                end = 16.dp
-            )
-        ,
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-//        EFFilter(
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjEw6t-ZsbPUfj6aBY3OFYudP16ZQcJX2k4Q&s",
-//            onAIClick = {
-//
-//            }
-//        )
+        EFTitlebar(
+            modifier = Modifier,
+            imageURL = "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+            isBackEnabled = false,
+            title = "Estate Flow",
+            onSearch = {},
+            onAI = {},
+            onProfile = {}
+        )
 
         LazyColumn(
             modifier = Modifier
+                .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
                 .weight(1F),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -90,16 +91,21 @@ private fun MainListScreenContent(
             ) { item ->
                 Item(
                     modifier = Modifier,
-                    imageURL = item.images.first {
+                    imageURL = item.images.firstOrNull() {
                         it.isPrimary
-                    }.imageUrl,
-//                    imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjEw6t-ZsbPUfj6aBY3OFYudP16ZQcJX2k4Q&s",
+                    }?.imageUrl ?: item.images.firstOrNull()?.imageUrl ?: "",
                     price = item.propertyEntity.price,
                     currency = item.propertyEntity.currency,
                     size = item.propertyEntity.size,
                     rooms = item.propertyEntity.rooms,
                     address = item.propertyEntity.address,
                     onItemClick = {}
+                )
+            }
+
+            item {
+                Spacer(
+                    modifier = Modifier.height(70.dp)
                 )
             }
         }
