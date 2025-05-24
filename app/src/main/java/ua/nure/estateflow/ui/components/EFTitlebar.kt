@@ -34,12 +34,16 @@ import ua.nure.estateflow.ui.theme.appDimensions
 @Composable
 fun EFTitlebar(
     modifier: Modifier = Modifier,
-    imageURL: String,
+    imageURL: String = "",
+    isProfileEnabled: Boolean = false,
+    isAIEnabled: Boolean = false,
+    isSearchEnabled: Boolean = false,
     isBackEnabled: Boolean = false,
     title: String,
-    onSearch: () -> Unit,
-    onAI: () -> Unit,
-    onProfile: () -> Unit,
+    onBack: () -> Unit = {},
+    onSearch: () -> Unit = {},
+    onAI: () -> Unit = {},
+    onProfile: () -> Unit = {},
 
 ) {
     val context = LocalContext.current
@@ -54,6 +58,11 @@ fun EFTitlebar(
     ) {
         if (isBackEnabled) {
             Icon(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .clickable {
+                        onBack()
+                    },
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = ""
             )
@@ -64,48 +73,57 @@ fun EFTitlebar(
             )
         }
         Text(
-            modifier = Modifier.weight(1F),
+            modifier = Modifier.weight(1F)
+                .padding(start = MaterialTheme.appDimensions.SmallSpace),
             text = title
         )
 
-        Text(
-            modifier = Modifier
-                .clickable {
-                    onProfile()
-                },
-            text = "John Doe \u2605"
-        )
-        AsyncImage(
-            modifier = Modifier
-                .size(MaterialTheme.appDimensions.IconSize)
-                .clip(CircleShape)
-                .clickable{
-                    onProfile()
-                },
-            model = ImageRequest.Builder(context)
-                .data(imageURL)
-                .build(),
-            contentDescription = "",
-            contentScale = ContentScale.FillBounds
-        )
-        Image(
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .clickable {
-                    onSearch()
-                },
-            painter = painterResource(R.drawable.search),
-            contentDescription = ""
-        )
-        Image(
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .clickable {
-                    onAI()
-                },
-            painter = painterResource(R.drawable.ai),
-            contentDescription = ""
-        )
+        if (isProfileEnabled) {
+            Text(
+                modifier = Modifier
+                    .clickable {
+                        onProfile()
+                    },
+                text = "John Doe \u2605"
+            )
+            AsyncImage(
+                modifier = Modifier
+                    .size(MaterialTheme.appDimensions.IconSize)
+                    .clip(CircleShape)
+                    .clickable{
+                        onProfile()
+                    },
+                model = ImageRequest.Builder(context)
+                    .data(imageURL)
+                    .build(),
+                contentDescription = "",
+                contentScale = ContentScale.FillBounds
+            )
+        }
+
+        if (isSearchEnabled) {
+            Image(
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .clickable {
+                        onSearch()
+                    },
+                painter = painterResource(R.drawable.search),
+                contentDescription = ""
+            )
+        }
+
+        if (isAIEnabled) {
+            Image(
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .clickable {
+                        onAI()
+                    },
+                painter = painterResource(R.drawable.ai),
+                contentDescription = ""
+            )
+        }
     }
 }
 

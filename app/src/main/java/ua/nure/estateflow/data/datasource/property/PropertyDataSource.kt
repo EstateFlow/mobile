@@ -6,5 +6,6 @@ import ua.nure.estateflow.data.local.entity.Property
 
 interface PropertyDataSource {
     suspend fun get(): Flow<List<Property>>
+    suspend fun getById(id: String): Flow<Property>
     suspend fun load(): Flow<DataSourceResponse<List<Property>>>
 }

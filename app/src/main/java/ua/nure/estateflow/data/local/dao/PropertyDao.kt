@@ -27,4 +27,7 @@ interface PropertyDao {
     @Query("SELECT * FROM propertyentity")
     fun getAll(): Flow<List<Property>>
 
+    @Query("SELECT * FROM propertyentity WHERE id = :id")
+    fun getById(id: String): Flow<Property>
+
 }

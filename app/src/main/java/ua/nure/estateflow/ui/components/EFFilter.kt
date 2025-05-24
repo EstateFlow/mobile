@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,19 +63,19 @@ fun EFFilter(
     onApartmentChanged: (Boolean) -> Unit,
 
 ) {
-    var searchField by remember { mutableStateOf(search) }
+    var searchField by rememberSaveable { mutableStateOf(search) }
 
-    var roomsFrom by remember { mutableStateOf<Int?>(null) }
-    var roomsTo by remember { mutableStateOf<Int?>(null) }
-    var priceFrom by remember { mutableStateOf<Int?>(null) }
-    var priceTo by remember { mutableStateOf<Int?>(null) }
-    var areaFrom by remember { mutableStateOf<Int?>(null) }
-    var areaTo by remember { mutableStateOf<Int?>(null) }
+    var roomsFrom by rememberSaveable { mutableStateOf<Int?>(null) }
+    var roomsTo by rememberSaveable { mutableStateOf<Int?>(null) }
+    var priceFrom by rememberSaveable { mutableStateOf<Int?>(null) }
+    var priceTo by rememberSaveable { mutableStateOf<Int?>(null) }
+    var areaFrom by rememberSaveable { mutableStateOf<Int?>(null) }
+    var areaTo by rememberSaveable { mutableStateOf<Int?>(null) }
 
-    var isForRent by remember { mutableStateOf(true) }
-    var isForPuchase by remember { mutableStateOf(true) }
-    var isHouse by remember { mutableStateOf(true) }
-    var isApartment by remember { mutableStateOf(true) }
+    var isForRent by rememberSaveable { mutableStateOf(true) }
+    var isForPuchase by rememberSaveable { mutableStateOf(true) }
+    var isHouse by rememberSaveable { mutableStateOf(true) }
+    var isApartment by rememberSaveable { mutableStateOf(true) }
 
 
     Column(

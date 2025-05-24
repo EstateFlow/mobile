@@ -6,6 +6,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import ua.nure.estateflow.ui.main.details.MainDetailsScreen
 import ua.nure.estateflow.ui.main.list.MainListScreen
 
 fun NavGraphBuilder.mainGraph(navController: NavController) {
@@ -15,6 +16,12 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
         composable<Screen.Main.List> {
             MainListScreen(
                 viewModel = hiltViewModel(),
+                navController = navController
+            )
+        }
+        composable<Screen.Main.Details> {
+            MainDetailsScreen(
+                mainDetailsViewModel = hiltViewModel(),
                 navController = navController
             )
         }

@@ -20,4 +20,11 @@
     <string name="area">Area</string>
     <string name="house">House</string>
     <string name="apartment">Apartment</string>
+    <string name="mainDetailsScreen">Details</string>
+    <string name="detais">Details</string>
+    <string name="roomsDetails">%d %s</string>
+    <string name="roomsPostfix">rooms</string>
+    <string name="rent">Rent</string>
+    <string name="sale">Sale</string>
+    <string name="priceFormat">%s %s</string>
 </resources>

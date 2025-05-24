@@ -10,7 +10,7 @@ sealed class Screen {
 
     @Serializable sealed class Main : Screen() {
         @Serializable data object List : Main()
-        @Serializable data object Details : Main()
+        @Serializable data class Details(val id: String) : Main()
         @Serializable data object Gallery : Main()
     }
 }

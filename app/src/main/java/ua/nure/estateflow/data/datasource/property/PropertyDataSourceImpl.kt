@@ -30,6 +30,13 @@ class PropertyDataSourceImpl @OptIn(ExperimentalCoroutinesApi::class) constructo
             .flowOn(dbDeliveryDispatcher)
             .catch { it.printStackTrace() }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override suspend fun getById(id: String): Flow<Property> =
+        dbDataSource.dbFlow
+            .flatMapLatest { db -> db.propertyDao.getById(id = id) }
+            .flowOn(dbDeliveryDispatcher)
+            .catch { it.printStackTrace() }
+
     override suspend fun load(): Flow<DataSourceResponse<List<Property>>> = flow {
         emit(DataSourceResponse.InProgress)
         propertyApi.load().run {

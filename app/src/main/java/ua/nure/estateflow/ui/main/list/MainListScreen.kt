@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFFilter
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
@@ -86,6 +87,9 @@ private fun MainListScreenContent(
             imageURL = "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
             isBackEnabled = false,
             title = "Estate Flow",
+            isAIEnabled = true,
+            isSearchEnabled = true,
+            isProfileEnabled = true,
             onSearch = {
                 isFilterActive = !isFilterActive
             },
@@ -158,7 +162,9 @@ private fun MainListScreenContent(
                     size = item.propertyEntity.size,
                     rooms = item.propertyEntity.rooms,
                     address = item.propertyEntity.address,
-                    onItemClick = {}
+                    onItemClick = {
+                        onAction(MainList.Action.OnNavigate(Screen.Main.Details(id = item.propertyEntity.id)))
+                    }
                 )
             }
 
