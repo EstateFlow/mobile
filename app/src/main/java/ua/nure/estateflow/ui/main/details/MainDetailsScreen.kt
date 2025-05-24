@@ -1,14 +1,20 @@
 package ua.nure.estateflow.ui.main.details
 
 import android.widget.Toast
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -75,10 +81,10 @@ private fun MainDetailsScreenContent(
     state: MainDetails.State,
     onAction: (MainDetails.Action) -> Unit
 ) {
-    val context = LocalContext.current
     Column(
         modifier = Modifier
     ) {
+        val galleryState = rememberLazyListState()
         EFTitlebar(
             isBackEnabled = true,
             title = stringResource(R.string.mainDetailsScreen),
@@ -86,14 +92,34 @@ private fun MainDetailsScreenContent(
                 onAction(MainDetails.Action.OnBack)
             }
         )
+        state.property?.images?.let { images ->
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .padding(top = MaterialTheme.appDimensions.SmallSpace)
+                ,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                state = galleryState,
+                flingBehavior = rememberSnapFlingBehavior(lazyListState = galleryState)
+            ) {
+                items(
+                    items = images,
+                    key = { it.id }
+                ) { image ->
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillParentMaxWidth()
+                            .clip(RoundedCornerShape(MaterialTheme.appDimensions.Radius))
+                        ,
+                        model = image.imageUrl,
+                        contentDescription = "",
+                        contentScale = ContentScale.FillBounds
+                    )
+                }
+            }
 
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-            ,
-            model = state.property?.images?.firstOrNull{ it.isPrimary }?.imageUrl ?: "",
-            contentDescription = "",
-        )
+        }
 
         Column(
             Modifier
