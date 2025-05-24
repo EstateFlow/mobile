@@ -49,11 +49,34 @@ import kotlin.to
 fun EFFilter(
     modifier: Modifier = Modifier,
     search: String = "",
-    onSearchChanged: (String) -> Unit = {}
+    onSearchChanged: (String) -> Unit,
+    onRoomsFromChanged: (Int?) -> Unit,
+    onRoomsToChanged: (Int?) -> Unit,
+    onPriceFromChanged: (Int?) -> Unit,
+    onPriceToChanged: (Int?) -> Unit,
+    onAreaFromChanged: (Int?) -> Unit,
+    onAreaToChanged: (Int?) -> Unit,
+    onForRentChanged: (Boolean) -> Unit,
+    onForPurchaseChanged: (Boolean) -> Unit,
+    onHouseChanged: (Boolean) -> Unit,
+    onApartmentChanged: (Boolean) -> Unit,
+
 ) {
-    var searchField by remember {
-        mutableStateOf(search)
-    }
+    var searchField by remember { mutableStateOf(search) }
+
+    var roomsFrom by remember { mutableStateOf<Int?>(null) }
+    var roomsTo by remember { mutableStateOf<Int?>(null) }
+    var priceFrom by remember { mutableStateOf<Int?>(null) }
+    var priceTo by remember { mutableStateOf<Int?>(null) }
+    var areaFrom by remember { mutableStateOf<Int?>(null) }
+    var areaTo by remember { mutableStateOf<Int?>(null) }
+
+    var isForRent by remember { mutableStateOf(true) }
+    var isForPuchase by remember { mutableStateOf(true) }
+    var isHouse by remember { mutableStateOf(true) }
+    var isApartment by remember { mutableStateOf(true) }
+
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -94,9 +117,14 @@ fun EFFilter(
                             .weight(1F)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = roomsFrom?.toString() ?: "",
                         label = R.string.from,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                roomsFrom = it
+                                onRoomsFromChanged(it)
+                            }
+                        }
                     )
                     EFTextField(
                         modifier = Modifier
@@ -104,9 +132,14 @@ fun EFFilter(
                             .padding(start = MaterialTheme.appDimensions.SmallSpace)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = roomsTo?.toString() ?: "",
                         label = R.string.to,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                roomsTo = it
+                                onRoomsToChanged(it)
+                            }
+                        }
                     )
                 }
 
@@ -126,9 +159,14 @@ fun EFFilter(
                             .weight(1F)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = priceFrom?.toString() ?: "",
                         label = R.string.from,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                priceFrom = it
+                                onPriceFromChanged(it)
+                            }
+                        }
                     )
                     EFTextField(
                         modifier = Modifier
@@ -136,9 +174,14 @@ fun EFFilter(
                             .padding(start = MaterialTheme.appDimensions.SmallSpace)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = priceTo?.toString() ?: "",
                         label = R.string.to,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                priceTo = it
+                                onPriceToChanged(it)
+                            }
+                        }
                     )
                 }
 
@@ -158,9 +201,14 @@ fun EFFilter(
                             .weight(1F)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = areaFrom?.toString() ?: "",
                         label = R.string.from,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                areaFrom = it
+                                onAreaFromChanged(it)
+                            }
+                        }
                     )
                     EFTextField(
                         modifier = Modifier
@@ -168,9 +216,14 @@ fun EFFilter(
                             .padding(start = MaterialTheme.appDimensions.SmallSpace)
                         ,
                         isPassword = false,
-                        value = "",
+                        value = areaTo?.toString() ?: "",
                         label = R.string.to,
-                        onValueChange = {}
+                        onValueChange = {
+                            it.toIntOrNull().let {
+                                areaTo = it
+                                onAreaToChanged(it)
+                            }
+                        }
                     )
                 }
 
@@ -186,8 +239,12 @@ fun EFFilter(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Checkbox(
-                        checked = true,
-                        onCheckedChange = {},
+                        checked = isForRent,
+                        onCheckedChange = {
+                            isForRent = it
+                            onForRentChanged(it)
+
+                        },
                         colors = CheckboxDefaults.colors().copy(
                             checkedBoxColor = CheckboxColor,
                             checkedBorderColor = CheckboxColor
@@ -205,8 +262,11 @@ fun EFFilter(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Checkbox(
-                        checked = true,
-                        onCheckedChange = {},
+                        checked = isForPuchase,
+                        onCheckedChange = {
+                            isForPuchase = it
+                            onForPurchaseChanged(it)
+                        },
                         colors = CheckboxDefaults.colors().copy(
                             checkedBoxColor = CheckboxColor,
                             checkedBorderColor = CheckboxColor
@@ -224,8 +284,11 @@ fun EFFilter(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Checkbox(
-                        checked = true,
-                        onCheckedChange = {},
+                        checked = isHouse,
+                        onCheckedChange = {
+                            isHouse = it
+                            onHouseChanged(it)
+                        },
                         colors = CheckboxDefaults.colors().copy(
                             checkedBoxColor = CheckboxColor,
                             checkedBorderColor = CheckboxColor
@@ -243,8 +306,11 @@ fun EFFilter(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Checkbox(
-                        checked = true,
-                        onCheckedChange = {},
+                        checked = isApartment,
+                        onCheckedChange = {
+                            isApartment = it
+                            onApartmentChanged(it)
+                        },
                         colors = CheckboxDefaults.colors().copy(
                             checkedBoxColor = CheckboxColor,
                             checkedBorderColor = CheckboxColor
@@ -265,6 +331,16 @@ fun EFFilter(
 private fun EFFilterPreview(modifier: Modifier = Modifier) {
     EFFilter(
         modifier = modifier,
-
+        onSearchChanged = {},
+        onRoomsToChanged = {},
+        onRoomsFromChanged = {},
+        onAreaFromChanged = {},
+        onAreaToChanged = {},
+        onPriceFromChanged = {},
+        onPriceToChanged = {},
+        onForRentChanged = {},
+        onForPurchaseChanged = {},
+        onHouseChanged = {},
+        onApartmentChanged = {}
         )
 }

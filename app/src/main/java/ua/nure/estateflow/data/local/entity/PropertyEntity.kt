@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 import androidx.room.Relation
 import com.google.gson.annotations.SerializedName
 import ua.nure.estateflow.data.remote.property.dto.ImageDto
+import ua.nure.estateflow.data.remote.property.dto.PropertyStatus
+import ua.nure.estateflow.data.remote.property.dto.PropertyType
+import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.data.remote.property.dto.ViewDto
 
 @Entity()
@@ -15,14 +18,14 @@ data class PropertyEntity(
     val ownerId: String,
     val title: String,
     val description: String,
-    val propertyType: String,
-    val transactionType: String,
+    val propertyType: PropertyType,
+    val transactionType: TransactionType,
     val price: String,
     val currency: String,
     val size: String,
     val rooms: Int,
     val address: String,
-    val status: String,
+    val status: PropertyStatus,
     val documentUrl: String?,
     val verificationComments: String = "",
     val isVerified: Boolean,

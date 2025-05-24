@@ -43,7 +43,7 @@ fun MainListScreen(
 ) {
     val context = LocalContext.current
     val state = viewModel.state.collectAsStateWithLifecycle()
-    val search = viewModel.search.collectAsStateWithLifecycle()
+    val filter = viewModel.filter.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collect {
@@ -60,7 +60,7 @@ fun MainListScreen(
     }
     MainListScreenContent(
         state = state,
-        search = search.value,
+        search = filter.value.search,
         onAction = viewModel::onAction
     )
 }
@@ -99,6 +99,36 @@ private fun MainListScreenContent(
                 search = search,
                 onSearchChanged = {
                     onAction(MainList.Action.OnSearch(search = it))
+                },
+                onRoomsFromChanged = {
+                    onAction(MainList.Action.OnRoomsFrom(it))
+                },
+                onRoomsToChanged = {
+                    onAction(MainList.Action.OnRoomsTo(it))
+                },
+                onPriceFromChanged = {
+                    onAction(MainList.Action.OnPriceFrom(it))
+                },
+                onPriceToChanged = {
+                    onAction(MainList.Action.OnPriceTo(it))
+                },
+                onAreaFromChanged = {
+                    onAction(MainList.Action.OnAreaFrom(it))
+                },
+                onAreaToChanged = {
+                    onAction(MainList.Action.OnAreaTo(it))
+                },
+                onForRentChanged = {
+                    onAction(MainList.Action.OnForRent(it))
+                },
+                onForPurchaseChanged = {
+                    onAction(MainList.Action.OnForPurchase(it))
+                },
+                onHouseChanged = {
+                    onAction(MainList.Action.OnHose(it))
+                },
+                onApartmentChanged = {
+                    onAction(MainList.Action.OnApartment(it))
                 }
             )
         }
