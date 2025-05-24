@@ -1,6 +1,7 @@
 package ua.nure.estateflow.ui.main.details
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,6 +44,7 @@ import ua.nure.estateflow.R
 import ua.nure.estateflow.data.remote.property.dto.PropertyType
 import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.ui.components.EFTitlebar
+import ua.nure.estateflow.ui.components.EfGalleryIndicator
 import ua.nure.estateflow.ui.theme.appDimensions
 import ua.nure.estateflow.ui.theme.largeTextStyle
 import ua.nure.estateflow.ui.theme.regularTextStyle
@@ -118,6 +120,16 @@ private fun MainDetailsScreenContent(
                     )
                 }
             }
+
+            EfGalleryIndicator(
+                modifier = Modifier
+                    .fillMaxWidth()
+                ,
+                selected = galleryState.firstVisibleItemIndex,
+                total = images.size,
+                active = R.drawable.heart,
+                passive = R.drawable.ai,
+            )
 
         }
 
