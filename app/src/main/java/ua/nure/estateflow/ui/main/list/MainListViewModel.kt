@@ -24,20 +24,7 @@ import javax.inject.Inject
 class MainListViewModel @Inject constructor(
     private val propertyDataSource: PropertyDataSource,
 ) : ViewModel() {
-    private val TAG by lazy { MainListViewModel::class.simpleName }
-//    val search = MutableStateFlow<String>("")
 
-//    val roomsFrom = MutableStateFlow<Int?>(null)
-//    val roomsTo = MutableStateFlow<Int?>(null)
-//    val priceFrom = MutableStateFlow<Int?>(null)
-//    val priceTo =   MutableStateFlow<Int?>(null)
-//    val areaFrom = MutableStateFlow<Int?>(null)
-//    val areaTo = MutableStateFlow<Int?>(null)
-//
-//    val isForRent = MutableStateFlow<Boolean>(true)
-//    val isForPurchase = MutableStateFlow<Boolean>(true)
-//    val isHouse = MutableStateFlow<Boolean>(true)
-//    val isApartment = MutableStateFlow<Boolean>(true)
     val filter = MutableStateFlow<Filter>(Filter())
 
     init {
