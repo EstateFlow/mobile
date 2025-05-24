@@ -24,7 +24,8 @@ data class PropertyDto(
     @SerializedName("createdAt") val createdAt: String,
     @SerializedName("updatedAt") val updatedAt: String,
     @SerializedName("images") val images: List<ImageDto>,
-    @SerializedName("views") val views: List<ViewDto>
+    @SerializedName("views") val views: List<ViewDto>,
+    @SerializedName("owner") val owner: OwnerDto,
 )
 
 fun PropertyDto.toEntity() =

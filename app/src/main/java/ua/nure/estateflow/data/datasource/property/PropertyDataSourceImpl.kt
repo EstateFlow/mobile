@@ -56,6 +56,9 @@ class PropertyDataSourceImpl @OptIn(ExperimentalCoroutinesApi::class) constructo
                         dbDataSource.db.viewDao.insert(
                             properties.flatMap { it.views }.map { it.toEntity() }
                         )
+                        dbDataSource.db.ownerDao.insert(
+                            properties.map { it.owner.toEntity() }
+                        )
                     }
 
                 }

@@ -39,5 +39,10 @@ data class Property(
         parentColumn = "id",
         entityColumn = "propertyId",
         entity = ImageEntity::class
-    ) val images: List<ImageEntity>
+    ) val images: List<ImageEntity>,
+    @Relation(
+        parentColumn = "ownerId",
+        entityColumn = "id",
+        entity = OwnerEntity::class
+    ) val owner: OwnerEntity
 )

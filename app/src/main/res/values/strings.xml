@@ -27,4 +27,5 @@
     <string name="rent">Rent</string>
     <string name="sale">Sale</string>
     <string name="priceFormat">%s %s</string>
+    <string name="contact">Contact</string>
 </resources>
