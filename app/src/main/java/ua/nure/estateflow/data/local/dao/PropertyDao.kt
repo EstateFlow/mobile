@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import ua.nure.estateflow.data.local.entity.Property
 import ua.nure.estateflow.data.local.entity.PropertyEntity
@@ -18,6 +19,9 @@ interface PropertyDao {
         insert(list)
     }
 
+    @Update
+    suspend fun update(property: PropertyEntity)
+
     @Query("DELETE FROM propertyentity")
     suspend fun deleteAll()
 
@@ -29,5 +33,8 @@ interface PropertyDao {
 
     @Query("SELECT * FROM propertyentity WHERE id = :id")
     fun getById(id: String): Flow<Property>
+
+    @Query("SELECT * FROM propertyentity WHERE id = :id")
+    fun getByIdStraight(id: String): PropertyEntity
 
 }

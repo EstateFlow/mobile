@@ -19,8 +19,11 @@ import ua.nure.estateflow.data.datasource.property.PropertyDataSource
 import ua.nure.estateflow.data.datasource.property.PropertyDataSourceImpl
 import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
+import ua.nure.estateflow.data.datasource.wishList.WishListDataSource
+import ua.nure.estateflow.data.datasource.wishList.WishListDataSourceImpl
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.property.PropertyApi
+import ua.nure.estateflow.data.remote.wishlist.WishListApi
 import javax.inject.Singleton
 
 
@@ -70,5 +73,17 @@ object DataSourceModule {
     ): DbDataSource = DbDataSourceImpl(
         context = context,
         profileDataSource = profileDataSource
+    )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Provides
+    fun provideWishListDataSource(
+        wishListApi: WishListApi,
+        dbDataSource: DbDataSource,
+        @DbDeliveryDispatcher dbDeliveryDispatcher: CloseableCoroutineDispatcher,
+    ): WishListDataSource = WishListDataSourceImpl(
+        wishListApi = wishListApi,
+        dbDataSource = dbDataSource,
+        dbDeliveryDispatcher = dbDeliveryDispatcher
     )
 }

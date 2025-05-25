@@ -31,6 +31,7 @@ data class PropertyEntity(
     val isVerified: Boolean,
     val createdAt: String,
     val updatedAt: String,
+    val isWished: Boolean,
 )
 
 data class Property(

@@ -45,5 +45,5 @@ val smallTextStyle = regularTextStyle.copy(
 )
 
 val largeTextStyle = regularTextStyle.copy(
-    fontSize = 22.sp
+    fontSize = 22.sp,
 )

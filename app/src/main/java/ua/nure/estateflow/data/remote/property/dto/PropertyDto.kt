@@ -3,6 +3,7 @@ package ua.nure.estateflow.data.remote.property.dto
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import ua.nure.estateflow.data.local.entity.PropertyEntity
+import kotlin.Boolean
 import kotlin.String
 
 data class PropertyDto(
@@ -26,6 +27,7 @@ data class PropertyDto(
     @SerializedName("images") val images: List<ImageDto>,
     @SerializedName("views") val views: List<ViewDto>,
     @SerializedName("owner") val owner: OwnerDto,
+    @SerializedName("isWished") val isWished: Boolean,
 )
 
 fun PropertyDto.toEntity() =
@@ -47,4 +49,5 @@ fun PropertyDto.toEntity() =
         isVerified = isVerified,
         createdAt = createdAt,
         updatedAt = updatedAt,
+        isWished = isWished,
     )

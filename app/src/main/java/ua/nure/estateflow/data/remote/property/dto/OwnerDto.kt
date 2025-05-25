@@ -10,9 +10,6 @@ data class OwnerDto(
     @SerializedName("username") val username: String,
     @SerializedName("email") val email: String,
     @SerializedName("role") val role: String,
-    @SerializedName("isEmailVerified") val isEmailVerified: Boolean,
-    @SerializedName("createdAt") val createdAt: String,
-    @SerializedName("updatedAt") val updatedAt: String,
 )
 
 fun OwnerDto.toEntity() =
@@ -21,7 +18,4 @@ fun OwnerDto.toEntity() =
         username = username,
         email = email,
         role = role,
-        isEmailVerified = isEmailVerified,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
     )

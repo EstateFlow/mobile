@@ -10,7 +10,4 @@ data class OwnerEntity(
     val username: String,
     val email: String,
     val role: String,
-    val isEmailVerified: Boolean,
-    val createdAt: String,
-    val updatedAt: String,
 )

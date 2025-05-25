@@ -1,5 +1,6 @@
 package ua.nure.estateflow.ui.main.list
 
+import android.graphics.Paint
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility

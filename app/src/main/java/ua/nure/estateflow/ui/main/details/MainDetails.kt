@@ -13,6 +13,7 @@ object MainDetails {
     sealed interface Action {
         data class OnNavigate(val destination: Screen) : Action
         data object OnBack : Action
+        data object OnAddToWishList : Action
     }
 
     data class State (
