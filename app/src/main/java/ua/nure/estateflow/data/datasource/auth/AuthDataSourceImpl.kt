@@ -1,7 +1,11 @@
 package ua.nure.estateflow.data.datasource.auth
 
+import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.DataSourceResponse
 import ua.nure.estateflow.data.datasource.profile.Profile
 import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
@@ -18,6 +22,7 @@ class AuthDataSourceImpl(
     private val tokenDataSource: TokenDataSource,
     private val profileDataSource: ProfileDataSource,
 ) : AuthDataSource {
+    private val TAG by lazy { AuthDataSourceImpl::class.simpleName }
     override suspend fun signUp(
         name: String,
         login: String,
@@ -59,11 +64,7 @@ class AuthDataSourceImpl(
                     isSuccessful -> {
                         body()?.let {
                             tokenDataSource.setToken(it.accessToken)
-                            profileDataSource.setProfile(
-                                Profile(
-                                    login = login
-                                )
-                            )
+                            loadUser()
                             emit(DataSourceResponse.Success())
                         }
                     }
@@ -75,6 +76,27 @@ class AuthDataSourceImpl(
         }
         catch (ex: InterruptedIOException) {
             emit(DataSourceResponse.Error<String>(message = "Server is down"))
+        }
+    }
+
+    private fun loadUser() {
+        CoroutineScope(Dispatchers.IO).launch {
+            authApi.loadUser().run {
+                when {
+                    isSuccessful -> {
+                        body()?.let {
+                            profileDataSource.setProfile(
+                                profile = Profile(
+                                    login = it.email,
+                                    username = it.username,
+                                    role = it.role,
+                                    isEmailVerified = it.isEmailVerified
+                                )
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 
