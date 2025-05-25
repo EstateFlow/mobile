@@ -95,7 +95,9 @@ private fun MainListScreenContent(
                 isFilterActive = !isFilterActive
             },
             onAI = {},
-            onProfile = {}
+            onProfile = {
+                onAction(MainList.Action.OnNavigate(destination = Screen.Profile))
+            }
         )
 
         AnimatedVisibility(visible = isFilterActive) {

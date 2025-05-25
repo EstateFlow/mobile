@@ -64,6 +64,11 @@ class AuthDataSourceImpl(
                     isSuccessful -> {
                         body()?.let {
                             tokenDataSource.setToken(it.accessToken)
+                            profileDataSource.setProfile(
+                                profile = Profile(
+                                    login = login
+                                )
+                            )
                             loadUser()
                             emit(DataSourceResponse.Success())
                         }

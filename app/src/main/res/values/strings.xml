@@ -28,4 +28,5 @@
     <string name="sale">Sale</string>
     <string name="priceFormat">%s %s</string>
     <string name="contact">Contact</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ua.nure.estateflow.ui.profile.ProfileScreen
 import ua.nure.estateflow.ui.signin.SignInScreen
 import ua.nure.estateflow.ui.signup.SignUpScreen
 
@@ -33,7 +34,14 @@ fun NavGraph(
                 navController = navController
             )
         }
+        composable<Screen.Profile> {
+            ProfileScreen(
+                viewModel = hiltViewModel(),
+                navController = navController
+            )
+        }
 
         mainGraph(navController = navController)
+
     }
 }

@@ -13,4 +13,6 @@ sealed class Screen {
         @Serializable data class Details(val id: String) : Main()
         @Serializable data object Gallery : Main()
     }
+
+    @Serializable data object Profile : Screen()
 }
