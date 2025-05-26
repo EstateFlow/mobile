@@ -8,11 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ua.nure.estateflow.data.datasource.ai.AiChatDataSource
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatListViewModel @Inject constructor(
-
+    private val aiChatDataSource: AiChatDataSource,
 ) : ViewModel() {
     private val _event = MutableSharedFlow<ChatList.Event>()
     val event = _event.asSharedFlow()
@@ -20,6 +21,9 @@ class ChatListViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            aiChatDataSource.get().collect {  }
+        }
 
     }
 

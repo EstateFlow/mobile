@@ -9,6 +9,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CloseableCoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import ua.nure.estateflow.data.datasource.ai.AiChatDataSource
+import ua.nure.estateflow.data.datasource.ai.AiChatDataSourceImpl
 import ua.nure.estateflow.data.datasource.auth.AuthDataSource
 import ua.nure.estateflow.data.datasource.auth.AuthDataSourceImpl
 import ua.nure.estateflow.data.datasource.db.DbDataSource
@@ -21,6 +23,7 @@ import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
 import ua.nure.estateflow.data.datasource.wishList.WishListDataSource
 import ua.nure.estateflow.data.datasource.wishList.WishListDataSourceImpl
+import ua.nure.estateflow.data.remote.ai.AiChatApi
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.property.PropertyApi
 import ua.nure.estateflow.data.remote.wishlist.WishListApi
@@ -83,6 +86,18 @@ object DataSourceModule {
         @DbDeliveryDispatcher dbDeliveryDispatcher: CloseableCoroutineDispatcher,
     ): WishListDataSource = WishListDataSourceImpl(
         wishListApi = wishListApi,
+        dbDataSource = dbDataSource,
+        dbDeliveryDispatcher = dbDeliveryDispatcher
+    )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Provides
+    fun provideAiChatDataSource(
+        aiChatApi: AiChatApi,
+        dbDataSource: DbDataSource,
+        @DbDeliveryDispatcher dbDeliveryDispatcher: CloseableCoroutineDispatcher,
+    ): AiChatDataSource = AiChatDataSourceImpl(
+        iaChatApi = aiChatApi,
         dbDataSource = dbDataSource,
         dbDeliveryDispatcher = dbDeliveryDispatcher
     )

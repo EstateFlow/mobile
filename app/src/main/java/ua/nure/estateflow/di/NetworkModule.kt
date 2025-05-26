@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.create
+import ua.nure.estateflow.data.remote.ai.AiChatApi
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.property.PropertyApi
 import ua.nure.estateflow.data.remote.wishlist.WishListApi
@@ -21,4 +22,6 @@ object NetworkModule {
 
     @Provides
     fun provideWishListApi(retrofit: Retrofit): WishListApi = retrofit.create(WishListApi::class.java)
+    @Provides
+    fun provideAiChatApi(retrofit: Retrofit): AiChatApi = retrofit.create(AiChatApi::class.java)
 }
