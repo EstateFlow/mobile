@@ -97,7 +97,7 @@ object DataSourceModule {
         dbDataSource: DbDataSource,
         @DbDeliveryDispatcher dbDeliveryDispatcher: CloseableCoroutineDispatcher,
     ): AiChatDataSource = AiChatDataSourceImpl(
-        iaChatApi = aiChatApi,
+        aiChatApi = aiChatApi,
         dbDataSource = dbDataSource,
         dbDeliveryDispatcher = dbDeliveryDispatcher
     )

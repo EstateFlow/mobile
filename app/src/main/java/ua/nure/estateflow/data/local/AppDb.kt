@@ -4,10 +4,12 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ua.nure.estateflow.data.local.dao.ImageDao
+import ua.nure.estateflow.data.local.dao.MessageDao
 import ua.nure.estateflow.data.local.dao.OwnerDao
 import ua.nure.estateflow.data.local.dao.PropertyDao
 import ua.nure.estateflow.data.local.dao.ViewDao
 import ua.nure.estateflow.data.local.entity.ImageEntity
+import ua.nure.estateflow.data.local.entity.MessageEntity
 import ua.nure.estateflow.data.local.entity.OwnerEntity
 import ua.nure.estateflow.data.local.entity.PropertyEntity
 import ua.nure.estateflow.data.local.entity.ViewEntity
@@ -18,9 +20,10 @@ import ua.nure.estateflow.data.local.entity.ViewEntity
         PropertyEntity::class,
         ImageEntity::class,
         ViewEntity::class,
-        OwnerEntity::class
+        OwnerEntity::class,
+        MessageEntity::class,
     ],
-    version = 7
+    version = 10
 )
 @TypeConverters(DbConverters::class)
 abstract class AppDb : RoomDatabase() {
@@ -28,4 +31,5 @@ abstract class AppDb : RoomDatabase() {
     abstract val imageDao: ImageDao
     abstract val viewDao: ViewDao
     abstract val ownerDao: OwnerDao
+    abstract val messageDao: MessageDao
 }
