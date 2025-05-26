@@ -3,8 +3,15 @@ package ua.nure.estateflow.ui.profile
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,12 +20,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.R
+import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFTitlebar
+import ua.nure.estateflow.ui.components.Item
+import ua.nure.estateflow.ui.main.list.MainList
+import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.largeTextStyle
 import ua.nure.estateflow.ui.theme.regularTextStyle
 
 @Composable
@@ -67,18 +82,113 @@ private fun ProfileScreenContent(
                 onAction(Profile.Action.OnBack)
             }
         )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = MaterialTheme.appDimensions.NormalSpace)
+                .padding(horizontal = MaterialTheme.appDimensions.NormalSpace),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.person),
+                contentDescription = ""
+            )
+            Text(
+                modifier = Modifier
+                    .padding(start = MaterialTheme.appDimensions.SmallSpace),
+                text = state.username,
+                style = regularTextStyle.copy(
+                    color = Color.Black
+                )
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = MaterialTheme.appDimensions.NormalSpace)
+                .padding(horizontal = MaterialTheme.appDimensions.NormalSpace),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.mail),
+                contentDescription = ""
+            )
+            Text(
+                modifier = Modifier
+                    .padding(start = MaterialTheme.appDimensions.SmallSpace),
+                text = state.email,
+                style = regularTextStyle.copy(
+                    color = Color.Black
+                )
+            )
+        }
+
+
         Text(
-            text = state.username,
-            style = regularTextStyle.copy(
-                color = Color.Black
+            modifier = Modifier
+                .padding(
+                    top = MaterialTheme.appDimensions.LargeSpace,
+                    start = MaterialTheme.appDimensions.NormalSpace
+                )
+                .fillMaxWidth()
+            ,
+            text = stringResource(R.string.wishlist),
+            style = largeTextStyle.copy(
+                color = Color.Black,
+                textAlign = TextAlign.Start
             )
         )
-        Text(
-            text = state.email,
-            style = regularTextStyle.copy(
-                color = Color.Black
+        if(state.properties.isEmpty()) {
+            Text(
+                modifier = Modifier
+                    .padding(top = MaterialTheme.appDimensions.NormalSpace)
+                    .fillMaxWidth()
+                    .padding(horizontal = MaterialTheme.appDimensions.NormalSpace)
+                ,
+                text = stringResource(R.string.emptyWishlistMessage)
             )
-        )
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(
+                        start = MaterialTheme.appDimensions.NormalSpace,
+                        top = MaterialTheme.appDimensions.SmallSpace,
+                        bottom = MaterialTheme.appDimensions.SmallSpace,
+                        end = MaterialTheme.appDimensions.NormalSpace
+                    )
+                    .weight(1F),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.NormalSpace)
+            ) {
+                items(
+                    items = state.properties,
+                    key = { it.propertyEntity.id }
+                ) { item ->
+                    Item(
+                        modifier = Modifier,
+                        imageURL = item.images.firstOrNull() {
+                            it.isPrimary
+                        }?.imageUrl ?: item.images.firstOrNull()?.imageUrl ?: "",
+                        price = item.propertyEntity.price,
+                        currency = item.propertyEntity.currency,
+                        size = item.propertyEntity.size,
+                        rooms = item.propertyEntity.rooms,
+                        address = item.propertyEntity.address,
+                        onItemClick = {
+                            onAction(Profile.Action.OnNavigate(Screen.Main.Details(id = item.propertyEntity.id)))
+                        }
+                    )
+                }
+
+                item {
+                    Spacer(
+                        modifier = Modifier.height(70.dp)
+                    )
+                }
+            }
+
+        }
     }
 }
 

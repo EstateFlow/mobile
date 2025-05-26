@@ -1,6 +1,7 @@
 package ua.nure.estateflow.ui.profile
 
 import ua.nure.estateflow.BuildConfig
+import ua.nure.estateflow.data.local.entity.Property
 import ua.nure.estateflow.data.remote.auth.dto.Role
 import ua.nure.estateflow.navigation.Screen
 
@@ -21,6 +22,7 @@ object Profile {
         val username: String = "",
         val email: String = "",
         val role: Role? = null,
-        val isEMailVerified: Boolean? = null
+        val isEMailVerified: Boolean? = null,
+        val properties: List<Property> = emptyList<Property>()
     )
 }

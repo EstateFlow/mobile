@@ -29,4 +29,6 @@
     <string name="priceFormat">%s %s</string>
     <string name="contact">Contact</string>
     <string name="profile">Profile</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="emptyWishlistMessage">Wish list is empty. Please add some properties to your wishlist</string>
 </resources>

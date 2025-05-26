@@ -10,12 +10,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
+import ua.nure.estateflow.data.datasource.property.PropertyDataSource
 import ua.nure.estateflow.ui.signin.SignIn
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val profileDataSource: ProfileDataSource,
+    private val propertyDataSource: PropertyDataSource
 ) : ViewModel() {
     private val _event = MutableSharedFlow<Profile.Event>()
     val event = _event.asSharedFlow()
@@ -31,6 +33,16 @@ class ProfileViewModel @Inject constructor(
                         email = profile?.login ?: "",
                         role = profile?.role,
                         isEMailVerified = profile?.isEmailVerified
+                    )
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            propertyDataSource.getWishlist().collect { list ->
+                _state.update {
+                    it.copy(
+                        properties = list
                     )
                 }
             }

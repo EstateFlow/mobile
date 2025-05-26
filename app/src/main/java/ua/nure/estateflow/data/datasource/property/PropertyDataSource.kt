@@ -8,4 +8,5 @@ interface PropertyDataSource {
     suspend fun get(): Flow<List<Property>>
     suspend fun getById(id: String): Flow<Property>
     suspend fun load(): Flow<DataSourceResponse<List<Property>>>
+    suspend fun getWishlist(): Flow<List<Property>>
 }

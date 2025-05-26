@@ -69,5 +69,12 @@ class PropertyDataSourceImpl @OptIn(ExperimentalCoroutinesApi::class) constructo
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override suspend fun getWishlist(): Flow<List<Property>> =
+        dbDataSource.dbFlow
+            .flatMapLatest { db -> db.propertyDao.getWishlist() }
+            .flowOn(dbDeliveryDispatcher)
+            .catch { it.printStackTrace() }
+
 
 }
