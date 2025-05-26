@@ -5,4 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class NestedGraph {
     @Serializable data object Main : NestedGraph()
+    @Serializable data object Chat : NestedGraph()
 }

@@ -42,6 +42,7 @@ fun NavGraph(
         }
 
         mainGraph(navController = navController)
+        chatGraph(navController = navController)
 
     }
 }

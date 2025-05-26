@@ -94,7 +94,9 @@ private fun MainListScreenContent(
             onSearch = {
                 isFilterActive = !isFilterActive
             },
-            onAI = {},
+            onAI = {
+                onAction(MainList.Action.OnNavigate(destination = Screen.Chat.List))
+            },
             onProfile = {
                 onAction(MainList.Action.OnNavigate(destination = Screen.Profile))
             }

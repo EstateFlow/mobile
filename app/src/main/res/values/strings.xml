@@ -31,4 +31,5 @@
     <string name="profile">Profile</string>
     <string name="wishlist">Wishlist</string>
     <string name="emptyWishlistMessage">Wish list is empty. Please add some properties to your wishlist</string>
+    <string name="chatListScreen">AI Chat</string>
 </resources>
