@@ -1,8 +1,14 @@
 package ua.nure.estateflow.ui.signin
 
+import android.credentials.CreateCredentialRequest.Builder
+import android.credentials.GetCredentialRequest
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.credentials.CredentialOption
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,6 +16,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ua.nure.estateflow.config.WEB_CLIENT_ID
 import ua.nure.estateflow.data.datasource.DataSourceResponse
 import ua.nure.estateflow.data.datasource.auth.AuthDataSource
 import ua.nure.estateflow.navigation.NestedGraph
@@ -50,8 +57,8 @@ class SignInViewModel @Inject constructor(
                 }
             }
             SignIn.Action.OnGoogleLogin -> {
-
             }
+
         }
     }
 
@@ -84,5 +91,17 @@ class SignInViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private fun onGoogleLogin() {
+        val googleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(true)
+            .setServerClientId(WEB_CLIENT_ID)
+            .build()
+
+//        val request: GetCredentialRequest = Builder()
+//            .addCredentialOption(googleIdOption)
+//            .build()
     }
 }

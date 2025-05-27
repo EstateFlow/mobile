@@ -82,6 +82,12 @@ dependencies {
     implementation(libs.chucker)
 //    implementation(libs.chuckerNoOp)
 
+    //Google
+    implementation(libs.credentials)
+    implementation(libs.credentials.play)
+    implementation(libs.googleid)
+//    implementation(libs.google.id)
+
     //DB
     implementation(libs.roomCommon)
     implementation(libs.roomRuntime)
