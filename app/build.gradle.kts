@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.credentials.play)
     implementation(libs.googleid)
 //    implementation(libs.google.id)
+    implementation(libs.google.signin)
 
     //DB
     implementation(libs.roomCommon)
