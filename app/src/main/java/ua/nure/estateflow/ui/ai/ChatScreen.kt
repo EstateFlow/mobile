@@ -1,16 +1,23 @@
 package ua.nure.estateflow.ui.ai
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -28,13 +35,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.R
+import ua.nure.estateflow.ui.components.ChatItem
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.theme.FocusedTextColor
 import ua.nure.estateflow.ui.theme.LabelTextColor
+import ua.nure.estateflow.ui.theme.appDimensions
 
 @Composable
 fun ChatListScreen(
@@ -43,6 +53,7 @@ fun ChatListScreen(
 ) {
     val context = LocalContext.current
     val state = viewModel.state.collectAsStateWithLifecycle()
+    val listState = rememberLazyListState()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collect {
@@ -57,11 +68,16 @@ fun ChatListScreen(
                 Chat.Event.OnBack -> {
                     navController.popBackStack()
                 }
+
+                is Chat.Event.OnScrollToLast -> {
+                    listState.animateScrollToItem(it.index)
+                }
             }
         }
     }
     ChatScreenContent(
         state = state.value,
+        listState = listState,
         onAction = viewModel::onAction
     )
 
@@ -70,11 +86,13 @@ fun ChatListScreen(
 @Composable
 private fun ChatScreenContent(
     state: Chat.State,
+    listState: LazyListState,
     onAction: (Chat.Action) -> Unit
 ) {
     var message by remember {
         mutableStateOf("")
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -89,11 +107,22 @@ private fun ChatScreenContent(
             }
         )
         LazyColumn(
-            modifier = Modifier.weight(1F)
+            modifier = Modifier
+                .weight(1F)
+                .padding(
+                    bottom = MaterialTheme.appDimensions.SmallSpace,
+                    start = MaterialTheme.appDimensions.SmallSpace,
+                    end = MaterialTheme.appDimensions.SmallSpace
+                ),
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.SmallSpace),
+            reverseLayout = true
         ) {
             items(items = state.messages, key = {it.id}) {
-                Text(
-                    text = it.content
+                ChatItem(
+                    modifier = Modifier,
+                    text = it.content,
+                    sender = it.sender
                 )
             }
 
@@ -129,6 +158,7 @@ private fun ChatScreenContent(
                 )
             }
         )
+        Spacer(modifier = Modifier.height(32.dp))
 
 
     }
@@ -139,6 +169,7 @@ private fun ChatScreenContent(
 @Composable
 private fun ChatScreenPreview (modifier: Modifier = Modifier) {
     ChatScreenContent(
-        state = Chat.State()
+        state = Chat.State(),
+        listState = rememberLazyListState()
     ) { }
 }

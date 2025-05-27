@@ -11,6 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val Background = Color(0xFF227AC4)
+val BackgroundAi = Color(0xFFFFB854)
 val FocusedTextColor = Color(0xFF227AC4)
 val LabelTextColor = Color(0xFF70A2CD)
 val ButtonTextColor = Color(0xFF227AC4)

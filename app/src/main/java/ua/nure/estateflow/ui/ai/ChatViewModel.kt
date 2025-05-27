@@ -3,12 +3,14 @@ package ua.nure.estateflow.ui.ai
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import ua.nure.estateflow.data.datasource.DataSourceResponse
 import ua.nure.estateflow.data.datasource.ai.AiChatDataSource
 import ua.nure.estateflow.ui.ai.Chat.Event.*
@@ -31,6 +33,8 @@ class ChatViewModel @Inject constructor(
                         messages = list
                     )
                 }
+                delay(300)
+                _event.emit(Chat.Event.OnScrollToLast(index = list.size))
             }
         }
 

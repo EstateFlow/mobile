@@ -8,6 +8,7 @@ object Chat {
         data class OnMessage(val message: String) : Event
         data class OnNavigate(val destination: Screen): Event
         data object OnBack : Event
+        data class OnScrollToLast(val index: Int) : Event
     }
 
     sealed interface Action {

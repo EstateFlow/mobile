@@ -10,6 +10,7 @@ data class ContentMessageDto(
     @SerializedName("sender") val sender: Sender,
     @SerializedName("content") val content: String,
     @SerializedName("createdAt") val createdAt: String,
+    @SerializedName("index") val index: Int,
 )
 
 enum class Sender (val sender: String) {
@@ -23,4 +24,5 @@ fun ContentMessageDto.toEntity(): MessageEntity =
         sender = sender,
         content = content,
         createdAt = createdAt,
+        index = index
     )

@@ -11,4 +11,5 @@ data class MessageEntity (
     val sender: Sender,
     val content: String,
     val createdAt: String,
+    val index: Int
 )

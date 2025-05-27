@@ -15,6 +15,7 @@ data class AppDimension(
     val NormalSpace: Dp = 16.dp,
     val LargeSpace: Dp = 32.dp,
     val Radius: Dp = 10.dp,
+    val ChatRadius: Dp = 15.dp
 )
 
 val LocalAppDimension = compositionLocalOf {

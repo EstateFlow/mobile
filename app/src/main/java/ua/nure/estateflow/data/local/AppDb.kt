@@ -23,7 +23,7 @@ import ua.nure.estateflow.data.local.entity.ViewEntity
         OwnerEntity::class,
         MessageEntity::class,
     ],
-    version = 10
+    version = 11
 )
 @TypeConverters(DbConverters::class)
 abstract class AppDb : RoomDatabase() {
