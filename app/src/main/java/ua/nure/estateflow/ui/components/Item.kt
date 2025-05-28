@@ -28,9 +28,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.theme.Background
-import ua.nure.estateflow.ui.theme.DescriptionTextColor
-import ua.nure.estateflow.ui.theme.largeTextStyle
+import ua.nure.estateflow.ui.theme.AppTheme
 import ua.nure.estateflow.ui.theme.regularTextStyle
 import ua.nure.estateflow.ui.theme.smallTextStyle
 
@@ -50,7 +48,7 @@ fun Item(
             .height(105.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Background)
+            .background(AppTheme.colorScheme.background)
             .clickable {
                 onItemClick()
             }
@@ -77,7 +75,7 @@ fun Item(
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
-                color = DescriptionTextColor,
+                color = AppTheme.colorScheme.descriptionTextColor,
                 text = "$price $currency",
                 style = regularTextStyle
             )
@@ -86,21 +84,21 @@ fun Item(
                     .fillMaxWidth(),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                color = DescriptionTextColor,
+                color = AppTheme.colorScheme.descriptionTextColor,
                 text = address,
                 style = smallTextStyle
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
-                color = DescriptionTextColor,
+                color = AppTheme.colorScheme.descriptionTextColor,
                 text = "$rooms rooms",
                 style = smallTextStyle
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
-                color = DescriptionTextColor,
+                color = AppTheme.colorScheme.descriptionTextColor,
                 text = "$size m\u00B2",
                 style = smallTextStyle
             )

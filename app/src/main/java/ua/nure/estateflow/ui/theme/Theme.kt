@@ -3,12 +3,16 @@ package ua.nure.estateflow.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -33,6 +37,12 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+val LocalAppColorScheme = staticCompositionLocalOf { AppColors() }
+val LocalAppTypography = staticCompositionLocalOf { AppTypography() }
+val LocalAppDimension = staticCompositionLocalOf { AppDimension() }
+val LocalAppShape = staticCompositionLocalOf { AppShape() }
+
+
 @Composable
 fun EstateFlowTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -50,9 +60,48 @@ fun EstateFlowTheme(
         else -> LightColorScheme
     }
 
+
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
     )
+
+
 }
+
+@Composable
+fun AppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = if(darkTheme) DarkColors else LightColors
+    val typography = if(darkTheme) DarkTypography else LightTypography
+    val dimension = AppDimension()
+    val shape = AppShape()
+
+    CompositionLocalProvider(
+        LocalAppColorScheme provides colorScheme,
+        LocalAppTypography provides typography,
+        LocalAppDimension provides dimension,
+        LocalAppShape provides shape,
+        content = content
+    )
+}
+
+object AppTheme {
+    val colorScheme: AppColors
+        @Composable get() = LocalAppColorScheme.current
+
+    val typography: AppTypography
+        @Composable get() = LocalAppTypography.current
+
+    val dimension: AppDimension
+        @Composable get() = LocalAppDimension.current
+
+    val shape: AppShape
+        @Composable get() = LocalAppShape.current
+}
+
+

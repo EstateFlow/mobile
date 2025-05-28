@@ -14,9 +14,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ua.nure.estateflow.data.remote.ai.dto.Sender
-import ua.nure.estateflow.ui.theme.Background
-import ua.nure.estateflow.ui.theme.BackgroundAi
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 import ua.nure.estateflow.ui.theme.regularTextStyle
 
 @Composable
@@ -29,19 +27,19 @@ fun ChatItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                start = if (sender == Sender.user) MaterialTheme.appDimensions.LargeSpace else 0.dp,
-                end = if (sender == Sender.ai) MaterialTheme.appDimensions.LargeSpace else 0.dp,
+                start = if (sender == Sender.user) AppTheme.dimension.LargeSpace else 0.dp,
+                end = if (sender == Sender.ai) AppTheme.dimension.LargeSpace else 0.dp,
             )
-            .background(color = if (sender == Sender.user) Background else BackgroundAi, shape = RoundedCornerShape(
-            topStart = MaterialTheme.appDimensions.ChatRadius,
-            topEnd = MaterialTheme.appDimensions.ChatRadius,
-            bottomStart = if (sender == Sender.ai) 0.dp else MaterialTheme.appDimensions.ChatRadius,
-            bottomEnd = if (sender == Sender.user) 0.dp else MaterialTheme.appDimensions.ChatRadius,
+            .background(color = if (sender == Sender.user) AppTheme.colorScheme.background else AppTheme.colorScheme.backgroundAi, shape = RoundedCornerShape(
+            topStart = AppTheme.dimension.ChatRadius,
+            topEnd = AppTheme.dimension.ChatRadius,
+            bottomStart = if (sender == Sender.ai) 0.dp else AppTheme.dimension.ChatRadius,
+            bottomEnd = if (sender == Sender.user) 0.dp else AppTheme.dimension.ChatRadius,
         )),
     ) {
         Text(
             modifier = Modifier
-                .padding(all = MaterialTheme.appDimensions.NormalSpace),
+                .padding(all = AppTheme.dimension.NormalSpace),
             text = text,
             style = regularTextStyle,
         )

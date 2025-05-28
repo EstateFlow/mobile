@@ -42,9 +42,7 @@ import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.ChatItem
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
-import ua.nure.estateflow.ui.theme.FocusedTextColor
-import ua.nure.estateflow.ui.theme.LabelTextColor
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
 fun ChatListScreen(
@@ -110,12 +108,12 @@ private fun ChatScreenContent(
             modifier = Modifier
                 .weight(1F)
                 .padding(
-                    bottom = MaterialTheme.appDimensions.SmallSpace,
-                    start = MaterialTheme.appDimensions.SmallSpace,
-                    end = MaterialTheme.appDimensions.SmallSpace
+                    bottom = AppTheme.dimension.SmallSpace,
+                    start = AppTheme.dimension.SmallSpace,
+                    end = AppTheme.dimension.SmallSpace
                 ),
             state = listState,
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.SmallSpace),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimension.SmallSpace),
             reverseLayout = true
         ) {
             items(items = state.messages, key = {it.id}) {
@@ -135,9 +133,9 @@ private fun ChatScreenContent(
                 .copy(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
-                    focusedTextColor = FocusedTextColor,
-                    unfocusedTextColor = LabelTextColor,
-                    unfocusedLabelColor = FocusedTextColor,
+                    focusedTextColor = AppTheme.colorScheme.focusedTextColor,
+                    unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
+                    unfocusedLabelColor = AppTheme.colorScheme.focusedTextColor,
 
                     ),
             onValueChange = {

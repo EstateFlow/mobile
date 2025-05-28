@@ -35,8 +35,7 @@ import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.components.EFTitlebar
-import ua.nure.estateflow.ui.theme.Background
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 import kotlin.math.log
 
 @Composable
@@ -95,9 +94,9 @@ private fun RestoreScreenContent(
         )
         Box(
             modifier = Modifier
-                .padding(top = MaterialTheme.appDimensions.SmallSpace)
+                .padding(top = AppTheme.dimension.SmallSpace)
                 .size(200.dp)
-                .background(color = Background, shape = CircleShape)
+                .background(color = AppTheme.colorScheme.background, shape = CircleShape)
                 .clip(CircleShape)
             ,
             contentAlignment = Alignment.Center
@@ -114,7 +113,7 @@ private fun RestoreScreenContent(
 
         EFTextField(
             modifier = Modifier
-                .padding(top = MaterialTheme.appDimensions.NormalSpace),
+                .padding(top = AppTheme.dimension.NormalSpace),
             value = login,
             label = R.string.login,
             onValueChange = {
@@ -125,10 +124,10 @@ private fun RestoreScreenContent(
 
         EFButton(
             modifier = Modifier
-                .padding(top = MaterialTheme.appDimensions.NormalSpace)
+                .padding(top = AppTheme.dimension.NormalSpace)
             ,
             label = R.string.resetPassword,
-            backgroundColor = Background,
+            backgroundColor = AppTheme.colorScheme.background,
             textColor = Color.White,
             onClick = {
                 onAction(Restore.Action.OnRestorePassword)

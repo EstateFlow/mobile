@@ -33,8 +33,7 @@ import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFFilter
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
-import ua.nure.estateflow.ui.signup.SignUp
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 
 private val TAG = "MainListScreen"
 
@@ -104,7 +103,7 @@ private fun MainListScreenContent(
 
         AnimatedVisibility(visible = isFilterActive) {
             EFFilter(
-                modifier = Modifier.padding(MaterialTheme.appDimensions.SmallSpace),
+                modifier = Modifier.padding(AppTheme.dimension.SmallSpace),
                 search = search,
                 onSearchChanged = {
                     onAction(MainList.Action.OnSearch(search = it))
@@ -145,13 +144,13 @@ private fun MainListScreenContent(
         LazyColumn(
             modifier = Modifier
                 .padding(
-                    start = MaterialTheme.appDimensions.NormalSpace,
-                    top = MaterialTheme.appDimensions.SmallSpace,
-                    bottom = MaterialTheme.appDimensions.SmallSpace,
-                    end = MaterialTheme.appDimensions.NormalSpace
+                    start = AppTheme.dimension.SmallSpace,
+                    top = AppTheme.dimension.SmallSpace,
+                    bottom = AppTheme.dimension.SmallSpace,
+                    end = AppTheme.dimension.NormalSpace
                 )
                 .weight(1F),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.NormalSpace)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimension.NormalSpace)
         ) {
             items(
                 items = state.value.properties,
