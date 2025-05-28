@@ -143,7 +143,7 @@ fun SignInScreenContent(
         Text(
             modifier = Modifier
                 .clickable {
-                    onAction(SignIn.Action.OnNavigate(destination = Screen.RestorePassword))
+                    onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.RestorePassword))
                 }
                 .fillMaxWidth(),
             textAlign = TextAlign.Start,
@@ -157,7 +157,7 @@ fun SignInScreenContent(
         Text(
             modifier = Modifier
                 .clickable {
-                    onAction(SignIn.Action.OnNavigate(destination = Screen.RestorePassword))
+                    onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.SignUp))
                 }
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,

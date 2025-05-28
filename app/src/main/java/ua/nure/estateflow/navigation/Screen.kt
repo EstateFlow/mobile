@@ -4,10 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class Screen {
-    @Serializable data object  SignUp : Screen()
-    @Serializable data object  SignIn : Screen()
-    @Serializable data object  RestorePassword : Screen()
-    @Serializable data object Profile : Screen()
+    @Serializable sealed class Auth : Screen() {
+        @Serializable data object  SignUp : Auth()
+        @Serializable data object  SignIn : Auth()
+        @Serializable data object  RestorePassword : Auth()
+        @Serializable data object Profile : Auth()
+    }
 
     @Serializable sealed class Main : Screen() {
         @Serializable data object List : Main()

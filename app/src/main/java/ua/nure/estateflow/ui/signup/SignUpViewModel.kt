@@ -90,7 +90,7 @@ class SignUpViewModel @Inject constructor(
                         (it.payload as? String)?.let {
                             _event.emit(SignUp.Event.OnMessage(it))
                         }
-                        _event.emit(SignUp.Event.OnNavigate(destination = Screen.SignIn))
+                        _event.emit(SignUp.Event.OnNavigate(destination = Screen.Auth.SignIn))
                         _state.update {
                             it.copy(inProgress = false)
                         }

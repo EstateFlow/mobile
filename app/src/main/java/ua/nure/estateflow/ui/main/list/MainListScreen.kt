@@ -98,7 +98,7 @@ private fun MainListScreenContent(
                 onAction(MainList.Action.OnNavigate(destination = Screen.Chat.List))
             },
             onProfile = {
-                onAction(MainList.Action.OnNavigate(destination = Screen.Profile))
+                onAction(MainList.Action.OnNavigate(destination = Screen.Auth.Profile))
             }
         )
 
