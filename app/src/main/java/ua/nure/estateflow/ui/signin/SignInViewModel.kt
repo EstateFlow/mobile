@@ -86,7 +86,6 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private fun onGoogleLogin() {
 
     }
