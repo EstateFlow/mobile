@@ -37,6 +37,7 @@ fun EFTitlebar(
     isSearchEnabled: Boolean = false,
     isBackEnabled: Boolean = false,
     title: String,
+    username: String = "",
     onBack: () -> Unit = {},
     onSearch: () -> Unit = {},
     onAI: () -> Unit = {},
@@ -80,10 +81,11 @@ fun EFTitlebar(
         if (isProfileEnabled) {
             Text(
                 modifier = Modifier
+                    .padding(end = AppTheme.dimension.SmallSpace)
                     .clickable {
                         onProfile()
                     },
-                text = "John Doe \u2605",
+                text = username,
                 style = AppTheme.typography.regularTextStyle
             )
             AsyncImage(

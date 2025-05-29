@@ -5,11 +5,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.DataSourceResponse
@@ -21,11 +23,13 @@ import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.ui.main.list.MainList.Event.*
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class MainListViewModel @Inject constructor(
     private val propertyDataSource: PropertyDataSource,
     private val profileDataSource: ProfileDataSource,
 ) : ViewModel() {
+    private val TAG by lazy { MainListViewModel::class.simpleName }
 
     val filter = MutableStateFlow<Filter>(Filter())
 
@@ -133,18 +137,19 @@ class MainListViewModel @Inject constructor(
             }
         }
 
-//        viewModelScope.launch {
-//            profileDataSource.profileFlow.collect {
-//                it?.let { profile ->
-//                    _state.update {
-//                        it.copy(
-//                           profile = profile
-//                        )
-//                    }
-//                }
-//
-//            }
-//        }
+        viewModelScope.launch {
+            profileDataSource.profileFlow.debounce { 200 }.collect {
+                it?.let { profile ->
+                    _state.update {
+                        it.copy(
+                            profile = profile
+                        )
+                    }
+
+                }
+
+            }
+        }
     }
 
     private val _event = MutableSharedFlow<MainList.Event>()
