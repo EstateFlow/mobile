@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
@@ -18,11 +19,8 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,13 +36,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.ChatItem
 import ua.nure.estateflow.ui.components.EFTitlebar
-import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
@@ -96,7 +92,8 @@ private fun ChatScreenContent(
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(color = AppTheme.color.appBackground),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -131,15 +128,16 @@ private fun ChatScreenContent(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.appDimensions.SmallSpace),
+                .padding(horizontal = AppTheme.dimension.SmallSpace)
+            ,
             value = message,
             colors = TextFieldDefaults.colors()
                 .copy(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
-                    focusedTextColor = AppTheme.colorScheme.focusedTextColor,
-                    unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
-                    unfocusedLabelColor = AppTheme.colorScheme.focusedTextColor,
+                    focusedTextColor = AppTheme.color.focusedTextColor,
+                    unfocusedTextColor = AppTheme.color.labelTextColor,
+                    unfocusedLabelColor = AppTheme.color.focusedTextColor,
 
                     ),
             onValueChange = {
@@ -160,11 +158,12 @@ private fun ChatScreenContent(
                 )
             }
         )
-        Spacer(modifier = Modifier
-            .height(WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
+        Spacer(
+            modifier = Modifier
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                )
         )
-
-
     }
 
 }

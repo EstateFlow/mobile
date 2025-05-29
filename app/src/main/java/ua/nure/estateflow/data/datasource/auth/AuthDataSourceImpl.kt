@@ -110,7 +110,9 @@ class AuthDataSourceImpl(
                                     login = it.email,
                                     username = it.username,
                                     role = it.role,
-                                    isEmailVerified = it.isEmailVerified
+                                    isEmailVerified = it.isEmailVerified,
+//                                    avatarUrl = it.avatarUrl,
+//                                    bio = it.bio
                                 )
                             )
                         }

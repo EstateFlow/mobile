@@ -13,13 +13,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -49,7 +47,7 @@ fun EFTitlebar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(AppTheme.colorScheme.toolBarColor)
+            .background(AppTheme.color.toolBarColor)
             .padding(top = 32.dp, bottom = 8.dp)
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -63,7 +61,8 @@ fun EFTitlebar(
                         onBack()
                     },
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = ""
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
             )
         } else {
             Box(
@@ -74,7 +73,8 @@ fun EFTitlebar(
         Text(
             modifier = Modifier.weight(1F)
                 .padding(start = AppTheme.dimension.SmallSpace),
-            text = title
+            text = title,
+            style = AppTheme.typography.regularTextStyle
         )
 
         if (isProfileEnabled) {
@@ -83,7 +83,8 @@ fun EFTitlebar(
                     .clickable {
                         onProfile()
                     },
-                text = "John Doe \u2605"
+                text = "John Doe \u2605",
+                style = AppTheme.typography.regularTextStyle
             )
             AsyncImage(
                 modifier = Modifier
@@ -101,26 +102,28 @@ fun EFTitlebar(
         }
 
         if (isSearchEnabled) {
-            Image(
+            Icon(
                 modifier = Modifier
                     .clip(shape = CircleShape)
                     .clickable {
                         onSearch()
                     },
                 painter = painterResource(R.drawable.search),
-                contentDescription = ""
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
             )
         }
 
         if (isAIEnabled) {
-            Image(
+            Icon(
                 modifier = Modifier
                     .clip(shape = CircleShape)
                     .clickable {
                         onAI()
                     },
                 painter = painterResource(R.drawable.ai),
-                contentDescription = ""
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
             )
         }
     }

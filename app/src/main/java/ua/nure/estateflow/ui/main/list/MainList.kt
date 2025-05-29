@@ -1,5 +1,6 @@
 package ua.nure.estateflow.ui.main.list
 
+import ua.nure.estateflow.data.datasource.profile.Profile
 import ua.nure.estateflow.data.local.entity.Property
 import ua.nure.estateflow.navigation.Screen
 
@@ -26,6 +27,7 @@ object MainList {
 
     data class State (
         val inProgress: Boolean = false,
-        val properties: List<Property> = emptyList<Property>()
+        val properties: List<Property> = emptyList<Property>(),
+        val profile: Profile? = null
     )
 }

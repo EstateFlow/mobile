@@ -49,8 +49,6 @@ import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.EfGalleryIndicator
 import ua.nure.estateflow.ui.theme.AppTheme
-import ua.nure.estateflow.ui.theme.largeTextStyle
-import ua.nure.estateflow.ui.theme.regularTextStyle
 
 @Composable
 fun MainDetailsScreen(
@@ -88,6 +86,7 @@ private fun MainDetailsScreenContent(
 ) {
     Column(
         modifier = Modifier
+            .background(color = AppTheme.color.appBackground)
     ) {
         val galleryState = rememberLazyListState()
         EFTitlebar(
@@ -102,7 +101,6 @@ private fun MainDetailsScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(220.dp)
-                    .padding(top = AppTheme.dimension.SmallSpace)
                 ,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 state = galleryState,
@@ -153,9 +151,7 @@ private fun MainDetailsScreenContent(
                             start = AppTheme.dimension.SmallSpace
                         ),
                     text = stringResource(R.string.detais),
-                    style = largeTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.largeTextStyle
                 )
                 Spacer(
                     modifier = Modifier.weight(1F)
@@ -169,7 +165,7 @@ private fun MainDetailsScreenContent(
                             onAction(MainDetails.Action.OnAddToWishList)
                         },
                     painter = painterResource(R.drawable.heart),
-                    tint = if(state.property?.propertyEntity?.isWished == true) Color.Red else Color.Black,
+                    tint = if(state.property?.propertyEntity?.isWished == true) Color.Red else AppTheme.color.controlBackground,
                     contentDescription = ""
                 )
                 Icon(
@@ -177,7 +173,8 @@ private fun MainDetailsScreenContent(
                         .padding(horizontal = AppTheme.dimension.SmallSpace)
                         .size(AppTheme.dimension.IconSize),
                     painter = painterResource(R.drawable.share),
-                    contentDescription = ""
+                    contentDescription = "",
+                    tint = AppTheme.color.controlBackground
                 )
 
             }
@@ -194,8 +191,7 @@ private fun MainDetailsScreenContent(
                         prop.propertyEntity.price,
                         prop.propertyEntity.currency
                     ),
-                    style = largeTextStyle.copy(
-                        color = Color.Black,
+                    style = AppTheme.typography.largeTextStyle.copy(
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -209,9 +205,7 @@ private fun MainDetailsScreenContent(
                         PropertyType.house -> stringResource(R.string.house)
                         PropertyType.apartment -> stringResource(R.string.apartment)
                     },
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -223,9 +217,7 @@ private fun MainDetailsScreenContent(
                         TransactionType.rent -> stringResource(R.string.rent)
                         TransactionType.sale -> stringResource(R.string.sale)
                     },
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -234,9 +226,7 @@ private fun MainDetailsScreenContent(
                             vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.address,
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -245,9 +235,7 @@ private fun MainDetailsScreenContent(
                             vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.size + " m\u00B2",
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -261,9 +249,7 @@ private fun MainDetailsScreenContent(
                             prop.propertyEntity.rooms,
                             stringResource(R.string.roomsPostfix)
                         ),
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -272,9 +258,7 @@ private fun MainDetailsScreenContent(
                             vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.description,
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -283,9 +267,7 @@ private fun MainDetailsScreenContent(
                             start = AppTheme.dimension.SmallSpace
                         ),
                     text = stringResource(R.string.contact),
-                    style = largeTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Text(
                     modifier = Modifier
@@ -294,9 +276,7 @@ private fun MainDetailsScreenContent(
                             vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.owner.username,
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
 
                 Text(
@@ -306,9 +286,7 @@ private fun MainDetailsScreenContent(
                             vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.owner.email,
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
 
                 Box(modifier = Modifier.size(50.dp))

@@ -1,6 +1,7 @@
 package ua.nure.estateflow.ui.profile
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,8 +34,6 @@ import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.main.list.MainList
 import ua.nure.estateflow.ui.theme.AppTheme
-import ua.nure.estateflow.ui.theme.largeTextStyle
-import ua.nure.estateflow.ui.theme.regularTextStyle
 
 @Composable
 fun ProfileScreen(
@@ -70,7 +69,10 @@ private fun ProfileScreenContent(
     onAction: (Profile.Action) -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = AppTheme.color.appBackground)
+        ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -92,15 +94,14 @@ private fun ProfileScreenContent(
         ) {
             Icon(
                 painter = painterResource(R.drawable.person),
-                contentDescription = ""
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
             )
             Text(
                 modifier = Modifier
                     .padding(start = AppTheme.dimension.SmallSpace),
                 text = state.username,
-                style = regularTextStyle.copy(
-                    color = Color.Black
-                )
+                style = AppTheme.typography.regularTextStyle
             )
         }
         Row(
@@ -113,15 +114,14 @@ private fun ProfileScreenContent(
         ) {
             Icon(
                 painter = painterResource(R.drawable.mail),
-                contentDescription = ""
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
             )
             Text(
                 modifier = Modifier
                     .padding(start = AppTheme.dimension.SmallSpace),
                 text = state.email,
-                style = regularTextStyle.copy(
-                    color = Color.Black
-                )
+                style = AppTheme.typography.regularTextStyle
             )
         }
 
@@ -135,8 +135,7 @@ private fun ProfileScreenContent(
                 .fillMaxWidth()
             ,
             text = stringResource(R.string.wishlist),
-            style = largeTextStyle.copy(
-                color = Color.Black,
+            style = AppTheme.typography.largeTextStyle.copy(
                 textAlign = TextAlign.Start
             )
         )
@@ -147,7 +146,8 @@ private fun ProfileScreenContent(
                     .fillMaxWidth()
                     .padding(horizontal = AppTheme.dimension.NormalSpace)
                 ,
-                text = stringResource(R.string.emptyWishlistMessage)
+                text = stringResource(R.string.emptyWishlistMessage),
+                style = AppTheme.typography.regularTextStyle
             )
         } else {
             LazyColumn(

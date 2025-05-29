@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.DataSourceResponse
+import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
 import ua.nure.estateflow.data.datasource.property.PropertyDataSource
 import ua.nure.estateflow.data.local.entity.Property
 import ua.nure.estateflow.data.remote.property.dto.PropertyType
@@ -23,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainListViewModel @Inject constructor(
     private val propertyDataSource: PropertyDataSource,
+    private val profileDataSource: ProfileDataSource,
 ) : ViewModel() {
 
     val filter = MutableStateFlow<Filter>(Filter())
@@ -130,6 +132,19 @@ class MainListViewModel @Inject constructor(
                 }
             }
         }
+
+//        viewModelScope.launch {
+//            profileDataSource.profileFlow.collect {
+//                it?.let { profile ->
+//                    _state.update {
+//                        it.copy(
+//                           profile = profile
+//                        )
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     private val _event = MutableSharedFlow<MainList.Event>()

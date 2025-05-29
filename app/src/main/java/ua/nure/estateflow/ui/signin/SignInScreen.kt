@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -44,14 +45,13 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.R
 import ua.nure.estateflow.config.WEB_CLIENT_ID
 import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
-import ua.nure.estateflow.ui.signup.SignUp
+import ua.nure.estateflow.ui.components.EfMainImage
 import ua.nure.estateflow.ui.theme.AppTheme
 
 private val TAG = "SignInScreen"
@@ -90,8 +90,9 @@ fun SignInScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF227AC4))
-            .padding(top = 32.dp, start = 64.dp, end = 64.dp),
+            .background(color = AppTheme.color.appBackground)
+            .padding(top = 32.dp, start = 64.dp, end = 64.dp)
+        ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -100,15 +101,7 @@ fun SignInScreenContent(
         val context = LocalContext.current
         val credentialManager = remember { CredentialManager.create(context = context) }
 
-        Image(
-            modifier = Modifier
-                .size(
-                    width = 203.dp,
-                    height = 244.dp
-                ),
-            painter = painterResource(R.drawable.estate_flow),
-            contentDescription = ""
-        )
+        EfMainImage(modifier = Modifier)
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
@@ -140,13 +133,15 @@ fun SignInScreenContent(
         )
         Text(
             modifier = Modifier
+                .fillMaxWidth()
                 .clickable {
                     onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.RestorePassword))
-                }
-                .fillMaxWidth(),
-            textAlign = TextAlign.Start,
+                },
             text = stringResource(R.string.forgotPassword),
-            color = AppTheme.colorScheme.helpingTextColor
+            style = AppTheme.typography.regularTextStyle.copy(
+                color = AppTheme.color.helpingTextColor,
+                textAlign = TextAlign.Start
+            )
         )
         Spacer(
             modifier = Modifier
@@ -158,9 +153,11 @@ fun SignInScreenContent(
                     onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.SignUp))
                 }
                 .fillMaxWidth(),
-            textAlign = TextAlign.Center,
+            style = AppTheme.typography.regularTextStyle.copy(
+                color = AppTheme.color.helpingTextColor,
+                textAlign = TextAlign.Start
+            ),
             text = stringResource(R.string.dontHaveAnAccount),
-            color = AppTheme.colorScheme.descriptionTextColor
         )
         Spacer(
             modifier = Modifier

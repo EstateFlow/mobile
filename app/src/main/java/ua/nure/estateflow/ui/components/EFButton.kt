@@ -5,11 +5,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -22,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.signup.SignUp
 import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
@@ -30,8 +26,8 @@ fun EFButton(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     @DrawableRes image: Int? = null,
-    backgroundColor: Color = AppTheme.colorScheme.buttonColor,
-    textColor: Color = AppTheme.colorScheme.buttonTextColor,
+    backgroundColor: Color = AppTheme.color.buttonColor,
+    textColor: Color = AppTheme.color.buttonTextColor,
     onClick: () -> Unit
 ) {
     Button(
@@ -50,11 +46,14 @@ fun EFButton(
         ) {
             Text(
                 text = stringResource(label),
-                color = textColor
+                style = AppTheme.typography.regularTextStyle.copy(
+                    color = textColor
+                )
             )
             image?.let {
                 Image(
                     modifier = Modifier
+                        .padding(start = 4.dp)
                         .size(36.dp),
                     painter = painterResource(it),
                     contentDescription = ""

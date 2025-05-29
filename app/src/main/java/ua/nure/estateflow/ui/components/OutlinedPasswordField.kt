@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,10 +39,11 @@ fun OutlinedPasswordTextField(
             .copy(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedTextColor = AppTheme.colorScheme.focusedTextColor,
-                unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
-                unfocusedLabelColor = Color.White,
-                ),
+                focusedTextColor = AppTheme.color.focusedTextColor,
+                unfocusedTextColor = AppTheme.color.labelTextColor,
+                unfocusedLabelColor = AppTheme.color.focusedTextColor,
+            )
+        ,
         label = {
             Text(text = stringResource(label))
         },

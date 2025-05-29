@@ -41,7 +41,9 @@ import androidx.navigation.NavController
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
+import ua.nure.estateflow.ui.components.EfMainImage
 import ua.nure.estateflow.ui.components.OutlinedPasswordTextField
+import ua.nure.estateflow.ui.theme.AppTheme
 import kotlin.math.log
 
 @Composable
@@ -79,7 +81,7 @@ fun SignUpScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF227AC4))
+            .background(color = AppTheme.color.appBackground)
             .padding(top = 32.dp, start = 64.dp, end = 64.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -89,15 +91,7 @@ fun SignUpScreenContent(
         var password by remember { mutableStateOf(state.value.password) }
         var confirmPassword by remember { mutableStateOf(state.value.confirmPassword) }
 
-        Image(
-            modifier = Modifier
-                .size(
-                    width = 203.dp,
-                    height = 244.dp
-                ),
-            painter = painterResource(R.drawable.estate_flow),
-            contentDescription = ""
-        )
+        EfMainImage(modifier = Modifier)
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()

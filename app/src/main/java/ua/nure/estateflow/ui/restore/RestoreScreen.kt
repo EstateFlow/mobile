@@ -11,14 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,8 +32,8 @@ import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.components.EFTitlebar
+import ua.nure.estateflow.ui.components.EfMainImage
 import ua.nure.estateflow.ui.theme.AppTheme
-import kotlin.math.log
 
 @Composable
 fun RestoreScreen(
@@ -78,6 +75,7 @@ private fun RestoreScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(color = AppTheme.color.appBackground)
         ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -92,24 +90,7 @@ private fun RestoreScreenContent(
                 onAction(Restore.Action.OnBack)
             }
         )
-        Box(
-            modifier = Modifier
-                .padding(top = AppTheme.dimension.SmallSpace)
-                .size(200.dp)
-                .background(color = AppTheme.colorScheme.background, shape = CircleShape)
-                .clip(CircleShape)
-            ,
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier
-                    .size(150.dp)
-                    .padding(bottom = 10.dp)
-                ,
-                painter = painterResource(R.drawable.estate_flow),
-                contentDescription = ""
-            )
-        }
+        EfMainImage(modifier = Modifier)
 
         EFTextField(
             modifier = Modifier
@@ -127,7 +108,7 @@ private fun RestoreScreenContent(
                 .padding(top = AppTheme.dimension.NormalSpace)
             ,
             label = R.string.resetPassword,
-            backgroundColor = AppTheme.colorScheme.background,
+            backgroundColor = AppTheme.color.background,
             textColor = Color.White,
             onClick = {
                 onAction(Restore.Action.OnRestorePassword)

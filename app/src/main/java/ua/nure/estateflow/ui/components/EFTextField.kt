@@ -1,8 +1,6 @@
 package ua.nure.estateflow.ui.components
 
-import android.R.attr.name
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -14,7 +12,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
@@ -33,7 +30,7 @@ fun EFTextField(
             onValueChange = {
                 onValueChange(it)
             },
-            label = label
+            label = label,
         )
     } else {
         OutlinedTextField(
@@ -43,11 +40,11 @@ fun EFTextField(
                 .copy(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
-                    focusedTextColor = AppTheme.colorScheme.focusedTextColor,
-                    unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
-                    unfocusedLabelColor = AppTheme.colorScheme.focusedTextColor,
-
-                    ),
+                    focusedTextColor = AppTheme.color.focusedTextColor,
+                    unfocusedTextColor = AppTheme.color.labelTextColor,
+                    unfocusedLabelColor = AppTheme.color.focusedTextColor,
+                    )
+                    ,
             label = {
                 Text(text = stringResource(label))
             },

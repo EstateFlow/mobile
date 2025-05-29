@@ -7,5 +7,7 @@ data class UserDto(
     @SerializedName("email") val email: String,
     @SerializedName("username") val username: String,
     @SerializedName("role") val role: Role,
-    @SerializedName("isEmailVerified") val isEmailVerified: Boolean
+    @SerializedName("isEmailVerified") val isEmailVerified: Boolean,
+//    @SerializedName("avatarUrl") val avatarUrl: String = "",
+//    @SerializedName("bio") val bio: String = "",
 )

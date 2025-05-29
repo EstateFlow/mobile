@@ -1,48 +1,33 @@
 package ua.nure.estateflow.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.request.ImageRequest
 import ua.nure.estateflow.App
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.theme.AppTheme
-import ua.nure.estateflow.ui.theme.regularTextStyle
-import kotlin.to
+import ua.nure.estateflow.ui.theme.DarkColors
+import ua.nure.estateflow.ui.theme.LightColors
 
 @Composable
 fun EFFilter(
@@ -81,7 +66,7 @@ fun EFFilter(
             .fillMaxWidth()
             .border(
                 width = 1.dp,
-                color = AppTheme.colorScheme.toolBarColor,
+                color = AppTheme.color.toolBarColor,
                 shape = RoundedCornerShape(AppTheme.dimension.Radius)
             )
             .padding(all = AppTheme.dimension.SmallSpace)
@@ -104,9 +89,7 @@ fun EFFilter(
             ) {
                 Text(
                     text = stringResource(R.string.rooms),
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Row(
                     modifier = Modifier
@@ -146,9 +129,7 @@ fun EFFilter(
                     modifier = Modifier
                         .padding(top = AppTheme.dimension.SmallSpace),
                     text = stringResource(R.string.price),
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Row(
                     modifier = Modifier
@@ -188,9 +169,7 @@ fun EFFilter(
                     modifier = Modifier
                         .padding(top = AppTheme.dimension.SmallSpace),
                     text = stringResource(R.string.area),
-                    style = regularTextStyle.copy(
-                        color = Color.Black
-                    )
+                    style = AppTheme.typography.regularTextStyle
                 )
                 Row(
                     modifier = Modifier
@@ -245,12 +224,13 @@ fun EFFilter(
 
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
-                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
+                            checkedBoxColor = AppTheme.color.checkboxColor,
+                            checkedBorderColor = AppTheme.color.checkboxColor
                         ),
                     )
                     Text(
-                        text = stringResource(R.string.forRent)
+                        text = stringResource(R.string.forRent),
+                        style = AppTheme.typography.regularTextStyle
                     )
                 }
 
@@ -267,12 +247,13 @@ fun EFFilter(
                             onForPurchaseChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
-                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
+                            checkedBoxColor = AppTheme.color.checkboxColor,
+                            checkedBorderColor = AppTheme.color.checkboxColor
                         ),
                     )
                     Text(
-                        text = stringResource(R.string.forPurchase)
+                        text = stringResource(R.string.forPurchase),
+                        style = AppTheme.typography.regularTextStyle
                     )
                 }
 
@@ -289,12 +270,13 @@ fun EFFilter(
                             onHouseChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
-                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
+                            checkedBoxColor = AppTheme.color.checkboxColor,
+                            checkedBorderColor = AppTheme.color.checkboxColor
                         ),
                     )
                     Text(
-                        text = stringResource(R.string.house)
+                        text = stringResource(R.string.house),
+                        style = AppTheme.typography.regularTextStyle
                     )
                 }
 
@@ -311,12 +293,13 @@ fun EFFilter(
                             onApartmentChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
-                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
+                            checkedBoxColor = AppTheme.color.checkboxColor,
+                            checkedBorderColor = AppTheme.color.checkboxColor
                         ),
                     )
                     Text(
-                        text = stringResource(R.string.apartment)
+                        text = stringResource(R.string.apartment),
+                        style = AppTheme.typography.regularTextStyle
                     )
                 }
             }
@@ -328,18 +311,35 @@ fun EFFilter(
 @Preview(showBackground = true)
 @Composable
 private fun EFFilterPreview(modifier: Modifier = Modifier) {
-    EFFilter(
-        modifier = modifier,
-        onSearchChanged = {},
-        onRoomsToChanged = {},
-        onRoomsFromChanged = {},
-        onAreaFromChanged = {},
-        onAreaToChanged = {},
-        onPriceFromChanged = {},
-        onPriceToChanged = {},
-        onForRentChanged = {},
-        onForPurchaseChanged = {},
-        onHouseChanged = {},
-        onApartmentChanged = {}
+    Column {
+        EFFilter(
+            modifier = modifier.background(color = DarkColors.appBackground),
+            onSearchChanged = {},
+            onRoomsToChanged = {},
+            onRoomsFromChanged = {},
+            onAreaFromChanged = {},
+            onAreaToChanged = {},
+            onPriceFromChanged = {},
+            onPriceToChanged = {},
+            onForRentChanged = {},
+            onForPurchaseChanged = {},
+            onHouseChanged = {},
+            onApartmentChanged = {}
         )
+        EFFilter(
+            modifier = modifier.background(color = LightColors.appBackground),
+            onSearchChanged = {},
+            onRoomsToChanged = {},
+            onRoomsFromChanged = {},
+            onAreaFromChanged = {},
+            onAreaToChanged = {},
+            onPriceFromChanged = {},
+            onPriceToChanged = {},
+            onForRentChanged = {},
+            onForPurchaseChanged = {},
+            onHouseChanged = {},
+            onApartmentChanged = {}
+        )
+    }
+
 }
