@@ -22,6 +22,7 @@ object Profile {
         val username: String = "",
         val email: String = "",
         val role: Role? = null,
+        val avatarUrl: String = "",
         val isEMailVerified: Boolean? = null,
         val properties: List<Property> = emptyList<Property>()
     )

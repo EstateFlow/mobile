@@ -32,7 +32,8 @@ class ProfileViewModel @Inject constructor(
                         username = profile?.username ?: "",
                         email = profile?.login ?: "",
                         role = profile?.role,
-                        isEMailVerified = profile?.isEmailVerified
+                        isEMailVerified = profile?.isEmailVerified,
+                        avatarUrl = profile?.avatarUrl ?: ""
                     )
                 }
             }
