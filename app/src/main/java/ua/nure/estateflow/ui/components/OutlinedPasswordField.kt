@@ -18,8 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.theme.FocusedTextColor
-import ua.nure.estateflow.ui.theme.LabelTextColor
+import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
 fun OutlinedPasswordTextField(
@@ -41,8 +40,8 @@ fun OutlinedPasswordTextField(
             .copy(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedTextColor = FocusedTextColor,
-                unfocusedTextColor = LabelTextColor,
+                focusedTextColor = AppTheme.colorScheme.focusedTextColor,
+                unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
                 unfocusedLabelColor = Color.White,
                 ),
         label = {

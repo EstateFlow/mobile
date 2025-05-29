@@ -15,8 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.theme.FocusedTextColor
-import ua.nure.estateflow.ui.theme.LabelTextColor
+import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
 fun EFTextField(
@@ -44,9 +43,9 @@ fun EFTextField(
                 .copy(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
-                    focusedTextColor = FocusedTextColor,
-                    unfocusedTextColor = LabelTextColor,
-                    unfocusedLabelColor = FocusedTextColor,
+                    focusedTextColor = AppTheme.colorScheme.focusedTextColor,
+                    unfocusedTextColor = AppTheme.colorScheme.labelTextColor,
+                    unfocusedLabelColor = AppTheme.colorScheme.focusedTextColor,
 
                     ),
             label = {

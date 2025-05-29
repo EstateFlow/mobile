@@ -28,8 +28,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.theme.ToolBarColor
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
 fun EFTitlebar(
@@ -50,7 +49,7 @@ fun EFTitlebar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(ToolBarColor)
+            .background(AppTheme.colorScheme.toolBarColor)
             .padding(top = 32.dp, bottom = 8.dp)
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -74,7 +73,7 @@ fun EFTitlebar(
         }
         Text(
             modifier = Modifier.weight(1F)
-                .padding(start = MaterialTheme.appDimensions.SmallSpace),
+                .padding(start = AppTheme.dimension.SmallSpace),
             text = title
         )
 
@@ -88,7 +87,7 @@ fun EFTitlebar(
             )
             AsyncImage(
                 modifier = Modifier
-                    .size(MaterialTheme.appDimensions.IconSize)
+                    .size(AppTheme.dimension.IconSize)
                     .clip(CircleShape)
                     .clickable{
                         onProfile()

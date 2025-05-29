@@ -52,9 +52,7 @@ import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.signup.SignUp
-import ua.nure.estateflow.ui.theme.DescriptionTextColor
-import ua.nure.estateflow.ui.theme.FocusedTextColor
-import ua.nure.estateflow.ui.theme.HelpingTextColor
+import ua.nure.estateflow.ui.theme.AppTheme
 
 private val TAG = "SignInScreen"
 
@@ -143,12 +141,12 @@ fun SignInScreenContent(
         Text(
             modifier = Modifier
                 .clickable {
-                    onAction(SignIn.Action.OnNavigate(destination = Screen.RestorePassword))
+                    onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.RestorePassword))
                 }
                 .fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = stringResource(R.string.forgotPassword),
-            color = HelpingTextColor
+            color = AppTheme.colorScheme.helpingTextColor
         )
         Spacer(
             modifier = Modifier
@@ -157,12 +155,12 @@ fun SignInScreenContent(
         Text(
             modifier = Modifier
                 .clickable {
-                    onAction(SignIn.Action.OnNavigate(destination = Screen.RestorePassword))
+                    onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.SignUp))
                 }
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             text = stringResource(R.string.dontHaveAnAccount),
-            color = DescriptionTextColor
+            color = AppTheme.colorScheme.descriptionTextColor
         )
         Spacer(
             modifier = Modifier

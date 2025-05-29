@@ -38,11 +38,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
+import ua.nure.estateflow.App
 import ua.nure.estateflow.R
-import ua.nure.estateflow.ui.theme.Background
-import ua.nure.estateflow.ui.theme.CheckboxColor
-import ua.nure.estateflow.ui.theme.ToolBarColor
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 import ua.nure.estateflow.ui.theme.regularTextStyle
 import kotlin.to
 
@@ -83,10 +81,10 @@ fun EFFilter(
             .fillMaxWidth()
             .border(
                 width = 1.dp,
-                color = ToolBarColor,
-                shape = RoundedCornerShape(MaterialTheme.appDimensions.Radius)
+                color = AppTheme.colorScheme.toolBarColor,
+                shape = RoundedCornerShape(AppTheme.dimension.Radius)
             )
-            .padding(all = MaterialTheme.appDimensions.SmallSpace)
+            .padding(all = AppTheme.dimension.SmallSpace)
     ) {
         EFTextField(
             modifier = Modifier,
@@ -130,7 +128,7 @@ fun EFFilter(
                     EFTextField(
                         modifier = Modifier
                             .weight(1F)
-                            .padding(start = MaterialTheme.appDimensions.SmallSpace)
+                            .padding(start = AppTheme.dimension.SmallSpace)
                         ,
                         isPassword = false,
                         value = roomsTo?.toString() ?: "",
@@ -146,7 +144,7 @@ fun EFFilter(
 
                 Text(
                     modifier = Modifier
-                        .padding(top = MaterialTheme.appDimensions.SmallSpace),
+                        .padding(top = AppTheme.dimension.SmallSpace),
                     text = stringResource(R.string.price),
                     style = regularTextStyle.copy(
                         color = Color.Black
@@ -172,7 +170,7 @@ fun EFFilter(
                     EFTextField(
                         modifier = Modifier
                             .weight(1F)
-                            .padding(start = MaterialTheme.appDimensions.SmallSpace)
+                            .padding(start = AppTheme.dimension.SmallSpace)
                         ,
                         isPassword = false,
                         value = priceTo?.toString() ?: "",
@@ -188,7 +186,7 @@ fun EFFilter(
 
                 Text(
                     modifier = Modifier
-                        .padding(top = MaterialTheme.appDimensions.SmallSpace),
+                        .padding(top = AppTheme.dimension.SmallSpace),
                     text = stringResource(R.string.area),
                     style = regularTextStyle.copy(
                         color = Color.Black
@@ -214,7 +212,7 @@ fun EFFilter(
                     EFTextField(
                         modifier = Modifier
                             .weight(1F)
-                            .padding(start = MaterialTheme.appDimensions.SmallSpace)
+                            .padding(start = AppTheme.dimension.SmallSpace)
                         ,
                         isPassword = false,
                         value = areaTo?.toString() ?: "",
@@ -247,8 +245,8 @@ fun EFFilter(
 
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = CheckboxColor,
-                            checkedBorderColor = CheckboxColor
+                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
+                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
                         ),
                     )
                     Text(
@@ -269,8 +267,8 @@ fun EFFilter(
                             onForPurchaseChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = CheckboxColor,
-                            checkedBorderColor = CheckboxColor
+                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
+                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
                         ),
                     )
                     Text(
@@ -291,8 +289,8 @@ fun EFFilter(
                             onHouseChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = CheckboxColor,
-                            checkedBorderColor = CheckboxColor
+                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
+                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
                         ),
                     )
                     Text(
@@ -313,8 +311,8 @@ fun EFFilter(
                             onApartmentChanged(it)
                         },
                         colors = CheckboxDefaults.colors().copy(
-                            checkedBoxColor = CheckboxColor,
-                            checkedBorderColor = CheckboxColor
+                            checkedBoxColor = AppTheme.colorScheme.checkboxColor,
+                            checkedBorderColor = AppTheme.colorScheme.checkboxColor
                         ),
                     )
                     Text(

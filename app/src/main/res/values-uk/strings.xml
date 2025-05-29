@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EstateFlow</string>
+    <string name="name">Ім\'я</string>
+    <string name="login">Електронна пошта</string>
+    <string name="password">Пароль</string>
+    <string name="confirmPassword">Підтвердити пароль</string>
+    <string name="getStarted">Почати</string>
+    <string name="forgotPassword">Забули пароль?</string>
+    <string name="getGoing">Продовжити</string>
+    <string name="continueWithGoogle">Продовжити з Google</string>
+    <string name="dontHaveAnAccount">Ще не зареєструвалися?</string>
+    <string name="askAI">Не впевнені? Запитайте ШІ</string>
+    <string name="search">Пошук</string>
+    <string name="rooms">Кімнати</string>
+    <string name="from">з</string>
+    <string name="to">по</string>
+    <string name="forRent">Для аренди</string>
+    <string name="forPurchase">Для придбання</string>
+    <string name="price">Ціна</string>
+    <string name="area">Площа</string>
+    <string name="house">Будинок</string>
+    <string name="apartment">Квартира</string>
+    <string name="mainDetailsScreen">Деталі</string>
+    <string name="detais">Деталі</string>
+    <string name="roomsDetails">%d %s</string>
+    <string name="roomsPostfix">кімнат</string>
+    <string name="rent">Оренда</string>
+    <string name="sale">Продаж</string>
+    <string name="priceFormat">%s %s</string>
+    <string name="contact">Контактна особа</string>
+    <string name="profile">Профіль</string>
+    <string name="wishlist">Список бажаного</string>
+    <string name="emptyWishlistMessage">Список бажань порожній. Додайте бажану нерухомість до свого списку бажань</string>
+    <string name="chatListScreen">ШІ Чат</string>
+    <string name="restorePasswordScreen">Відновити пароль</string>
+    <string name="resetPassword">Відновити пароль</string>
+</resources>

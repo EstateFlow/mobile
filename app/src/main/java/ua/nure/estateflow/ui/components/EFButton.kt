@@ -23,16 +23,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.signup.SignUp
-import ua.nure.estateflow.ui.theme.ButtonColor
-import ua.nure.estateflow.ui.theme.ButtonTextColor
+import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
 fun EFButton(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     @DrawableRes image: Int? = null,
-    backgroundColor: Color = ButtonColor,
-    textColor: Color = ButtonTextColor,
+    backgroundColor: Color = AppTheme.colorScheme.buttonColor,
+    textColor: Color = AppTheme.colorScheme.buttonTextColor,
     onClick: () -> Unit
 ) {
     Button(

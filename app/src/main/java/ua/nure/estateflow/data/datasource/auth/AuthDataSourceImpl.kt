@@ -13,6 +13,7 @@ import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSourceImpl
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.auth.dto.AuthRequest
+import ua.nure.estateflow.data.remote.auth.dto.ResetPasswordRequest
 import ua.nure.estateflow.data.remote.parseError
 import java.io.InterruptedIOException
 import kotlin.math.log
@@ -81,6 +82,20 @@ class AuthDataSourceImpl(
         }
         catch (ex: InterruptedIOException) {
             emit(DataSourceResponse.Error<String>(message = "Server is down"))
+        }
+    }
+
+    override suspend fun restorePassword(login: String): Flow<DataSourceResponse<Any>> = flow {
+        emit(DataSourceResponse.InProgress)
+        authApi.resetPassword(body = ResetPasswordRequest(email = login)).run {
+            when {
+                isSuccessful -> {
+                    emit(DataSourceResponse.Success(body()?.message))
+                }
+                else -> {
+                    parseError(errorBody = errorBody())
+                }
+            }
         }
     }
 

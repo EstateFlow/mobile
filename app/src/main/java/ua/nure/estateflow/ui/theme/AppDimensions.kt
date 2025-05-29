@@ -18,12 +18,8 @@ data class AppDimension(
     val ChatRadius: Dp = 15.dp
 )
 
-val LocalAppDimension = compositionLocalOf {
-    AppDimension()
-}
-
-val MaterialTheme.appDimensions: AppDimension
-    @Composable
-    @ReadOnlyComposable
-    @Stable
-    get() = LocalAppDimension.current
+//val MaterialTheme.appDimensions: AppDimension
+//    @Composable
+//    @ReadOnlyComposable
+//    @Stable
+//    get() = LocalAppDimension.current

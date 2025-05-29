@@ -32,7 +32,7 @@ import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.Item
 import ua.nure.estateflow.ui.main.list.MainList
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 import ua.nure.estateflow.ui.theme.largeTextStyle
 import ua.nure.estateflow.ui.theme.regularTextStyle
 
@@ -85,8 +85,8 @@ private fun ProfileScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = MaterialTheme.appDimensions.NormalSpace)
-                .padding(horizontal = MaterialTheme.appDimensions.NormalSpace),
+                .padding(top = AppTheme.dimension.NormalSpace)
+                .padding(horizontal = AppTheme.dimension.NormalSpace),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -96,7 +96,7 @@ private fun ProfileScreenContent(
             )
             Text(
                 modifier = Modifier
-                    .padding(start = MaterialTheme.appDimensions.SmallSpace),
+                    .padding(start = AppTheme.dimension.SmallSpace),
                 text = state.username,
                 style = regularTextStyle.copy(
                     color = Color.Black
@@ -106,8 +106,8 @@ private fun ProfileScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = MaterialTheme.appDimensions.NormalSpace)
-                .padding(horizontal = MaterialTheme.appDimensions.NormalSpace),
+                .padding(top = AppTheme.dimension.NormalSpace)
+                .padding(horizontal = AppTheme.dimension.NormalSpace),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -117,7 +117,7 @@ private fun ProfileScreenContent(
             )
             Text(
                 modifier = Modifier
-                    .padding(start = MaterialTheme.appDimensions.SmallSpace),
+                    .padding(start = AppTheme.dimension.SmallSpace),
                 text = state.email,
                 style = regularTextStyle.copy(
                     color = Color.Black
@@ -129,8 +129,8 @@ private fun ProfileScreenContent(
         Text(
             modifier = Modifier
                 .padding(
-                    top = MaterialTheme.appDimensions.LargeSpace,
-                    start = MaterialTheme.appDimensions.NormalSpace
+                    top = AppTheme.dimension.LargeSpace,
+                    start = AppTheme.dimension.NormalSpace
                 )
                 .fillMaxWidth()
             ,
@@ -143,9 +143,9 @@ private fun ProfileScreenContent(
         if(state.properties.isEmpty()) {
             Text(
                 modifier = Modifier
-                    .padding(top = MaterialTheme.appDimensions.NormalSpace)
+                    .padding(top = AppTheme.dimension.NormalSpace)
                     .fillMaxWidth()
-                    .padding(horizontal = MaterialTheme.appDimensions.NormalSpace)
+                    .padding(horizontal = AppTheme.dimension.NormalSpace)
                 ,
                 text = stringResource(R.string.emptyWishlistMessage)
             )
@@ -153,13 +153,13 @@ private fun ProfileScreenContent(
             LazyColumn(
                 modifier = Modifier
                     .padding(
-                        start = MaterialTheme.appDimensions.NormalSpace,
-                        top = MaterialTheme.appDimensions.SmallSpace,
-                        bottom = MaterialTheme.appDimensions.SmallSpace,
-                        end = MaterialTheme.appDimensions.NormalSpace
+                        start = AppTheme.dimension.NormalSpace,
+                        top = AppTheme.dimension.SmallSpace,
+                        bottom = AppTheme.dimension.SmallSpace,
+                        end = AppTheme.dimension.NormalSpace
                     )
                     .weight(1F),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.appDimensions.NormalSpace)
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimension.NormalSpace)
             ) {
                 items(
                     items = state.properties,

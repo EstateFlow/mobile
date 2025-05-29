@@ -48,7 +48,7 @@ import ua.nure.estateflow.data.remote.property.dto.PropertyType
 import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.EfGalleryIndicator
-import ua.nure.estateflow.ui.theme.appDimensions
+import ua.nure.estateflow.ui.theme.AppTheme
 import ua.nure.estateflow.ui.theme.largeTextStyle
 import ua.nure.estateflow.ui.theme.regularTextStyle
 
@@ -102,7 +102,7 @@ private fun MainDetailsScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(220.dp)
-                    .padding(top = MaterialTheme.appDimensions.SmallSpace)
+                    .padding(top = AppTheme.dimension.SmallSpace)
                 ,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 state = galleryState,
@@ -142,15 +142,15 @@ private fun MainDetailsScreenContent(
                 .weight(1F)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = MaterialTheme.appDimensions.SmallSpace),
+                modifier = Modifier.fillMaxWidth().padding(end = AppTheme.dimension.SmallSpace),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ){
                 Text(
                     modifier = Modifier
                         .padding(
-                            top = MaterialTheme.appDimensions.NormalSpace,
-                            start = MaterialTheme.appDimensions.SmallSpace
+                            top = AppTheme.dimension.NormalSpace,
+                            start = AppTheme.dimension.SmallSpace
                         ),
                     text = stringResource(R.string.detais),
                     style = largeTextStyle.copy(
@@ -162,8 +162,8 @@ private fun MainDetailsScreenContent(
                 )
                 Icon(
                     modifier = Modifier
-                        .padding(horizontal = MaterialTheme.appDimensions.SmallSpace)
-                        .size(MaterialTheme.appDimensions.IconSize)
+                        .padding(horizontal = AppTheme.dimension.SmallSpace)
+                        .size(AppTheme.dimension.IconSize)
                         .clip(CircleShape)
                         .clickable {
                             onAction(MainDetails.Action.OnAddToWishList)
@@ -174,8 +174,8 @@ private fun MainDetailsScreenContent(
                 )
                 Icon(
                     modifier = Modifier
-                        .padding(horizontal = MaterialTheme.appDimensions.SmallSpace)
-                        .size(MaterialTheme.appDimensions.IconSize),
+                        .padding(horizontal = AppTheme.dimension.SmallSpace)
+                        .size(AppTheme.dimension.IconSize),
                     painter = painterResource(R.drawable.share),
                     contentDescription = ""
                 )
@@ -186,8 +186,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = String.format(
                         stringResource(R.string.priceFormat),
@@ -202,8 +202,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = when(prop.propertyEntity.propertyType) {
                         PropertyType.house -> stringResource(R.string.house)
@@ -216,8 +216,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = when(prop.propertyEntity.transactionType) {
                         TransactionType.rent -> stringResource(R.string.rent)
@@ -230,8 +230,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.address,
                     style = regularTextStyle.copy(
@@ -241,8 +241,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.size + " m\u00B2",
                     style = regularTextStyle.copy(
@@ -252,8 +252,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = String
                         .format(
@@ -268,8 +268,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.propertyEntity.description,
                     style = regularTextStyle.copy(
@@ -279,8 +279,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            top = MaterialTheme.appDimensions.NormalSpace,
-                            start = MaterialTheme.appDimensions.SmallSpace
+                            top = AppTheme.dimension.NormalSpace,
+                            start = AppTheme.dimension.SmallSpace
                         ),
                     text = stringResource(R.string.contact),
                     style = largeTextStyle.copy(
@@ -290,8 +290,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.owner.username,
                     style = regularTextStyle.copy(
@@ -302,8 +302,8 @@ private fun MainDetailsScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.appDimensions.SmallSpace,
-                            vertical = MaterialTheme.appDimensions.SmallSpace
+                            horizontal = AppTheme.dimension.SmallSpace,
+                            vertical = AppTheme.dimension.SmallSpace
                         ),
                     text = prop.owner.email,
                     style = regularTextStyle.copy(

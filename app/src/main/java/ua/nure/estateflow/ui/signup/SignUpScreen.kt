@@ -42,10 +42,6 @@ import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.components.OutlinedPasswordTextField
-import ua.nure.estateflow.ui.theme.ButtonColor
-import ua.nure.estateflow.ui.theme.ButtonTextColor
-import ua.nure.estateflow.ui.theme.FocusedTextColor
-import ua.nure.estateflow.ui.theme.LabelTextColor
 import kotlin.math.log
 
 @Composable
