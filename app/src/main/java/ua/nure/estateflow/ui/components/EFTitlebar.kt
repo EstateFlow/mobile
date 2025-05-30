@@ -36,13 +36,14 @@ fun EFTitlebar(
     isAIEnabled: Boolean = false,
     isSearchEnabled: Boolean = false,
     isBackEnabled: Boolean = false,
+    isEditEnabled: Boolean = false,
     title: String,
     username: String = "",
     onBack: () -> Unit = {},
     onSearch: () -> Unit = {},
     onAI: () -> Unit = {},
     onProfile: () -> Unit = {},
-
+    onEdit: () -> Unit = {},
 ) {
     val context = LocalContext.current
     Row(
@@ -124,6 +125,18 @@ fun EFTitlebar(
                         onAI()
                     },
                 painter = painterResource(R.drawable.ai),
+                contentDescription = "",
+                tint = AppTheme.color.controlBackground
+            )
+        }
+        if (isEditEnabled) {
+            Icon(
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .clickable {
+                        onEdit()
+                    },
+                painter = painterResource(R.drawable.edit),
                 contentDescription = "",
                 tint = AppTheme.color.controlBackground
             )

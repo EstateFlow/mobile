@@ -8,7 +8,6 @@ sealed class Screen {
         @Serializable data object  SignUp : Auth()
         @Serializable data object  SignIn : Auth()
         @Serializable data object  RestorePassword : Auth()
-        @Serializable data object Profile : Auth()
     }
 
     @Serializable sealed class Main : Screen() {
@@ -20,5 +19,11 @@ sealed class Screen {
     @Serializable sealed class Chat : Screen() {
         @Serializable data object List : Chat()
         @Serializable data class Conversation(val id: String) : Chat()
+    }
+
+    @Serializable sealed class Profile : Screen() {
+        @Serializable data object ProfileScreen : Profile()
+        @Serializable data object ProfileEdit : Profile()
+
     }
 }

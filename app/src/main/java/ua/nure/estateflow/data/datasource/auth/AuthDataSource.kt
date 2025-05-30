@@ -7,4 +7,5 @@ interface AuthDataSource {
     suspend fun signUp(name: String,login: String, password: String): Flow<DataSourceResponse<Any>>
     suspend fun signIn(login: String, password: String): Flow<DataSourceResponse<Any>>
     suspend fun restorePassword(login: String): Flow<DataSourceResponse<Any>>
+    suspend fun updateUser(avatarUrl: String, username: String, bio: String): Flow<DataSourceResponse<Any>>
 }

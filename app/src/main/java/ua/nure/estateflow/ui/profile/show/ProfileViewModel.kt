@@ -1,4 +1,4 @@
-package ua.nure.estateflow.ui.profile
+package ua.nure.estateflow.ui.profile.show
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
 import ua.nure.estateflow.data.datasource.property.PropertyDataSource
-import ua.nure.estateflow.ui.signin.SignIn
+import ua.nure.estateflow.navigation.Screen
+import ua.nure.estateflow.ui.profile.show.Profile.Event.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +34,8 @@ class ProfileViewModel @Inject constructor(
                         email = profile?.login ?: "",
                         role = profile?.role,
                         isEMailVerified = profile?.isEmailVerified,
-                        avatarUrl = profile?.avatarUrl ?: ""
+                        avatarUrl = profile?.avatarUrl ?: "",
+                        bio = profile?.bio ?: "",
                     )
                 }
             }
@@ -53,10 +55,14 @@ class ProfileViewModel @Inject constructor(
     fun onAction(action: Profile.Action) = viewModelScope.launch {
         when(action) {
             Profile.Action.OnBack -> {
-                _event.emit(Profile.Event.OnBack)
+                _event.emit(OnBack)
             }
             is Profile.Action.OnNavigate -> {
-                _event.emit(Profile.Event.OnNavigate(destination = action.destination))
+                _event.emit(OnNavigate(destination = action.destination))
+            }
+
+            Profile.Action.OnEdit -> {
+                _event.emit(OnNavigate(destination = Screen.Profile.ProfileEdit))
             }
         }
     }

@@ -36,6 +36,10 @@
     <string name="shareMessage">Select</string>
     <string name="haveAnAccount">Have an account?</string>
     <string name="backToLogin">Back to sign in</string>
+    <string name="avatar">Avatar</string>
+    <string name="username">User name</string>
+    <string name="bio">Bio</string>
+    <string name="save">Save</string>
 
     <plurals name="roomsPostfix">
         <item quantity="one">%d room</item>

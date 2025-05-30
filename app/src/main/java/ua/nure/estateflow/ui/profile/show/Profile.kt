@@ -1,6 +1,5 @@
-package ua.nure.estateflow.ui.profile
+package ua.nure.estateflow.ui.profile.show
 
-import ua.nure.estateflow.BuildConfig
 import ua.nure.estateflow.data.local.entity.Property
 import ua.nure.estateflow.data.remote.auth.dto.Role
 import ua.nure.estateflow.navigation.Screen
@@ -15,6 +14,7 @@ object Profile {
     sealed interface Action {
         data class OnNavigate(val destination: Screen) : Action
         data object OnBack : Action
+        data object OnEdit : Action
     }
 
     data class State(
@@ -24,6 +24,7 @@ object Profile {
         val role: Role? = null,
         val avatarUrl: String = "",
         val isEMailVerified: Boolean? = null,
+        val bio: String = "",
         val properties: List<Property> = emptyList<Property>()
     )
 }
