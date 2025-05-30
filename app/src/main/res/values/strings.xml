@@ -34,4 +34,5 @@
     <string name="chatListScreen">AI Chat</string>
     <string name="restorePasswordScreen">Restore password</string>
     <string name="resetPassword">Reset password</string>
+    <string name="shareMessage">Select</string>
 </resources>

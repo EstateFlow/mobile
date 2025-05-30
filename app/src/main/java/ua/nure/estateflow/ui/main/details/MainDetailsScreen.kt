@@ -1,5 +1,6 @@
 package ua.nure.estateflow.ui.main.details
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -89,6 +90,9 @@ private fun MainDetailsScreenContent(
             .background(color = AppTheme.color.appBackground)
     ) {
         val galleryState = rememberLazyListState()
+        val context = LocalContext.current
+        val shareMessage = stringResource(R.string.shareMessage)
+
         EFTitlebar(
             isBackEnabled = true,
             title = stringResource(R.string.mainDetailsScreen),
@@ -140,7 +144,9 @@ private fun MainDetailsScreenContent(
                 .weight(1F)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = AppTheme.dimension.SmallSpace),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = AppTheme.dimension.SmallSpace),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ){
@@ -171,7 +177,24 @@ private fun MainDetailsScreenContent(
                 Icon(
                     modifier = Modifier
                         .padding(horizontal = AppTheme.dimension.SmallSpace)
-                        .size(AppTheme.dimension.IconSize),
+                        .size(AppTheme.dimension.IconSize)
+                        .clickable {
+                            context.startActivity(
+                                Intent.createChooser(
+                                    Intent(
+                                        Intent.ACTION_SEND
+                                    ).apply {
+                                        type = "text/plain"
+                                        putExtra(
+                                            Intent.EXTRA_TEXT,
+                                            "\u2302 ${state.property?.propertyEntity?.title ?: ""}\n\u2316 ${state.property?.propertyEntity?.address ?: ""}\n\u2606 ${state.property?.owner?.username ?: ""} \n\u2709 ${state.property?.owner?.email ?: ""}"
+                                        )
+                                    },
+                                    shareMessage
+                                )
+                            )
+                        }
+                    ,
                     painter = painterResource(R.drawable.share),
                     contentDescription = "",
                     tint = AppTheme.color.controlBackground
