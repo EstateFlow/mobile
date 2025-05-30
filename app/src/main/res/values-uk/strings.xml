@@ -35,8 +35,8 @@
     <string name="restorePasswordScreen">Відновити пароль</string>
     <string name="resetPassword">Відновити пароль</string>
     <string name="shareMessage">Оберіть</string>
-    <string name="haveAnAccount">Have an account?</string>
-    <string name="backToLogin">Back to sign in</string>
+    <string name="haveAnAccount">Маєте аккаунт?</string>
+    <string name="backToLogin">Повернутись до входу</string>
 
     <plurals name="roomsPostfix">
         <item quantity="one">%d кімната</item>
