@@ -35,5 +35,5 @@
     <string name="chatListScreen">ШІ Чат</string>
     <string name="restorePasswordScreen">Відновити пароль</string>
     <string name="resetPassword">Відновити пароль</string>
-    <string name="shareMessage">Select</string>
+    <string name="shareMessage">Оберіть</string>
 </resources>
