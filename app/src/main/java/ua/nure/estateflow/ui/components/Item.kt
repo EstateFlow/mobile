@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
+import ua.nure.estateflow.R
 import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
@@ -85,7 +86,7 @@ fun Item(
                 modifier = Modifier
                     .fillMaxWidth(),
                 color = AppTheme.color.descriptionTextColor,
-                text = "$rooms rooms",
+                text = context.resources.getQuantityString(R.plurals.roomsPostfix, rooms, rooms),
                 style = AppTheme.typography.smallContrastTextStyle
             )
             Text(

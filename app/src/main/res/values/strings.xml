@@ -8,7 +8,7 @@
     <string name="forgotPassword">Forgot password?</string>
     <string name="getGoing">Get going</string>
     <string name="continueWithGoogle">Continue with Google</string>
-    <string name="dontHaveAnAccount">Don\'t have an acoount?</string>
+    <string name="dontHaveAnAccount">Don\'t have an account?</string>
     <string name="askAI">Not sure? Ask AI</string>
     <string name="search">Search</string>
     <string name="rooms">Rooms</string>
@@ -23,7 +23,6 @@
     <string name="mainDetailsScreen">Details</string>
     <string name="detais">Details</string>
     <string name="roomsDetails">%d %s</string>
-    <string name="roomsPostfix">rooms</string>
     <string name="rent">Rent</string>
     <string name="sale">Sale</string>
     <string name="priceFormat">%s %s</string>
@@ -35,4 +34,13 @@
     <string name="restorePasswordScreen">Restore password</string>
     <string name="resetPassword">Reset password</string>
     <string name="shareMessage">Select</string>
+    <string name="haveAnAccount">Have an account?</string>
+    <string name="backToLogin">Back to sign in</string>
+
+    <plurals name="roomsPostfix">
+        <item quantity="one">%d room</item>
+        <item quantity="few">%d rooms</item>
+        <item quantity="many">%d rooms</item>
+        <item quantity="other">%d rooms</item>
+    </plurals>
 </resources>

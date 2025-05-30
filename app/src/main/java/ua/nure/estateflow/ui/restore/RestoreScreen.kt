@@ -3,14 +3,18 @@ package ua.nure.estateflow.ui.restore
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -24,15 +28,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.R
+import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.EfMainImage
+import ua.nure.estateflow.ui.signup.SignUp
 import ua.nure.estateflow.ui.theme.AppTheme
 
 @Composable
@@ -76,20 +83,13 @@ private fun RestoreScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(color = AppTheme.color.appBackground)
+            .padding(top = 32.dp)
         ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         var login by rememberSaveable { mutableStateOf(state.login) }
 
-        EFTitlebar(
-            modifier = Modifier.fillMaxWidth(),
-            isBackEnabled = true,
-            title = stringResource(R.string.restorePasswordScreen),
-            onBack = {
-                onAction(Restore.Action.OnBack)
-            }
-        )
         EfMainImage(modifier = Modifier)
 
         EFTextField(
@@ -102,7 +102,25 @@ private fun RestoreScreenContent(
                 onAction(Restore.Action.OnLoginChanged(login = it))
             }
         )
-
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(AppTheme.dimension.NormalSpace)
+        )
+        Text(
+            modifier = Modifier
+                .clickable{onAction(Restore.Action.OnNavigate(destination = Screen.Auth.SignIn))},
+            text = stringResource(R.string.backToLogin),
+            style = AppTheme.typography.regularTextStyle.copy(
+                color = AppTheme.color.helpingTextColor,
+                textAlign = TextAlign.Start
+            )
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(AppTheme.dimension.NormalSpace)
+        )
         EFButton(
             modifier = Modifier
                 .padding(top = AppTheme.dimension.NormalSpace)

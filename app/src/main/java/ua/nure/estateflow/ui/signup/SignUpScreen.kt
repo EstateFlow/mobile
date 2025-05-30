@@ -3,6 +3,7 @@ package ua.nure.estateflow.ui.signup
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,11 +35,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import ua.nure.estateflow.R
+import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
 import ua.nure.estateflow.ui.components.EfMainImage
@@ -147,7 +150,21 @@ fun SignUpScreenContent(
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(32.dp)
+                .height(AppTheme.dimension.NormalSpace)
+        )
+        Text(
+            modifier = Modifier
+                .clickable{onAction(SignUp.Action.OnNavigate(destination = Screen.Auth.SignIn))},
+            text = stringResource(R.string.haveAnAccount),
+            style = AppTheme.typography.regularTextStyle.copy(
+                color = AppTheme.color.helpingTextColor,
+                textAlign = TextAlign.Start
+            )
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(AppTheme.dimension.NormalSpace)
         )
         EFButton(
             modifier = Modifier,

@@ -24,7 +24,6 @@
     <string name="mainDetailsScreen">Деталі</string>
     <string name="detais">Деталі</string>
     <string name="roomsDetails">%d %s</string>
-    <string name="roomsPostfix">кімнат</string>
     <string name="rent">Оренда</string>
     <string name="sale">Продаж</string>
     <string name="priceFormat">%s %s</string>
@@ -36,4 +35,14 @@
     <string name="restorePasswordScreen">Відновити пароль</string>
     <string name="resetPassword">Відновити пароль</string>
     <string name="shareMessage">Оберіть</string>
+    <string name="haveAnAccount">Have an account?</string>
+    <string name="backToLogin">Back to sign in</string>
+
+    <plurals name="roomsPostfix">
+        <item quantity="one">%d кімната</item>
+        <item quantity="few">%d кімнати</item>
+        <item quantity="many">%d кімнат</item>
+        <item quantity="other">%d кімнат</item>
+    </plurals>
+
 </resources>

@@ -132,8 +132,8 @@ private fun MainDetailsScreenContent(
                 ,
                 selected = galleryState.firstVisibleItemIndex,
                 total = images.size,
-                active = R.drawable.heart,
-                passive = R.drawable.ai,
+                active = R.drawable.active_circle,
+                passive = R.drawable.passive_circle,
             )
 
         }
@@ -266,12 +266,11 @@ private fun MainDetailsScreenContent(
                             horizontal = AppTheme.dimension.SmallSpace,
                             vertical = AppTheme.dimension.SmallSpace
                         ),
-                    text = String
-                        .format(
-                            stringResource(R.string.roomsDetails),
-                            prop.propertyEntity.rooms,
-                            stringResource(R.string.roomsPostfix)
-                        ),
+                    text = context.resources.getQuantityString(
+                        R.plurals.roomsPostfix,
+                        state.property.propertyEntity.rooms,
+                        state.property.propertyEntity.rooms
+                    ),
                     style = AppTheme.typography.regularTextStyle
                 )
                 Text(

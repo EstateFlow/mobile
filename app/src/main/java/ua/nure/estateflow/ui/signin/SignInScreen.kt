@@ -133,7 +133,6 @@ fun SignInScreenContent(
         )
         Text(
             modifier = Modifier
-                .fillMaxWidth()
                 .clickable {
                     onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.RestorePassword))
                 },
@@ -151,8 +150,7 @@ fun SignInScreenContent(
             modifier = Modifier
                 .clickable {
                     onAction(SignIn.Action.OnNavigate(destination = Screen.Auth.SignUp))
-                }
-                .fillMaxWidth(),
+                },
             style = AppTheme.typography.regularTextStyle.copy(
                 color = AppTheme.color.helpingTextColor,
                 textAlign = TextAlign.Start
