@@ -21,6 +21,6 @@ object Chat {
     data class State (
         val inProgress: Boolean = false,
         val message: String = "",
-        val messages: List<MessageEntity> = emptyList<MessageEntity>()
+        val messages: List<MessageHolder> = emptyList<MessageHolder>()
     )
 }

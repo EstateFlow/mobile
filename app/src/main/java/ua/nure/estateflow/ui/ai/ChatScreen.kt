@@ -114,13 +114,15 @@ private fun ChatScreenContent(
                 ),
             state = listState,
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimension.SmallSpace),
-//            reverseLayout = true
         ) {
-            items(items = state.messages, key = {it.id}) {
+            items(items = state.messages, key = {it.message.id}) {
                 ChatItem(
                     modifier = Modifier,
-                    text = it.content,
-                    sender = it.sender
+                    parts = it.parts,
+                    sender = it.message.sender,
+                    onNavigate = {
+                        onAction(Chat.Action.OnNavigate(destination = it))
+                    }
                 )
             }
 

@@ -1,5 +1,7 @@
 package ua.nure.estateflow.ui.ai
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,20 +11,24 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import ua.nure.estateflow.data.datasource.DataSourceResponse
 import ua.nure.estateflow.data.datasource.ai.AiChatDataSource
+import ua.nure.estateflow.data.local.entity.MessageEntity
+import ua.nure.estateflow.data.remote.ai.dto.Sender
 import ua.nure.estateflow.ui.ai.Chat.Event.*
+import java.net.URL
 import javax.inject.Inject
+import androidx.core.net.toUri
 
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val aiChatDataSource: AiChatDataSource,
 ) : ViewModel() {
+    private val TAG by lazy { ChatViewModel::class.simpleName }
+
     private val _event = MutableSharedFlow<Chat.Event>()
     val event = _event.asSharedFlow()
     private val _state = MutableStateFlow<Chat.State>(Chat.State())
@@ -33,7 +39,12 @@ class ChatViewModel @Inject constructor(
             aiChatDataSource.get().collect { list ->
                 _state.update {
                     it.copy(
-                        messages = list
+                        messages = list.map {
+                            MessageHolder(
+                                message = it,
+                                parts = rebuildListMessage(it.content)
+                            )
+                        }
                     )
                 }
                 viewModelScope.launch {
@@ -75,6 +86,63 @@ class ChatViewModel @Inject constructor(
                 }
             }
         }
+
+    }
+
+    private fun rebuildListMessage(message: String): List<MessagePart> {
+        val regex = Regex("""\[(.+?)\]\((.+?)\)""")
+        val resultParts = mutableListOf<String>()
+        val links = mutableListOf<Pair<String, String>>()
+        var lastIndex = 0
+        for (match in regex.findAll(message)) {
+            val range = match.range
+
+            if (range.first > lastIndex) {
+                resultParts.add(message.substring(lastIndex, range.first))
+            }
+
+            links.add(match.groupValues[1] to match.groupValues[2])
+            lastIndex = range.last + 1
+        }
+
+        if (lastIndex < message.length) {
+            resultParts.add(message.substring(lastIndex))
+        }
+
+
+        return mutableListOf<MessagePart>().apply {
+            addAll(
+                when {
+                    links.isEmpty() -> {
+                        resultParts.map {
+                            MessagePart(text = it)
+                        }
+                    }
+                    resultParts.isNotEmpty() -> {
+                        mutableListOf<MessagePart>().apply {
+                            links.zip(resultParts).map { (link, result) ->
+                                add(MessagePart(text = result))
+                                add(MessagePart(text = link.first, id = link.second.toUri().getQueryParameter("propertyId")))
+                            }
+                            if(resultParts.size > links.size) {
+                                add(
+                                    MessagePart(
+                                        text = resultParts.get(resultParts.size -1)
+                                    )
+                                )
+                            }
+                        }
+                    }
+                    else ->{
+                        listOf<MessagePart>(
+
+                        )
+                    }
+                }
+            )
+
+        }
+
 
     }
 
@@ -134,3 +202,13 @@ class ChatViewModel @Inject constructor(
         }
     }
 }
+
+data class MessagePart(
+    val text: String,
+    val id: String? = null
+)
+
+data class MessageHolder(
+    val message: MessageEntity,
+    val parts: List<MessagePart> = emptyList<MessagePart>()
+)
