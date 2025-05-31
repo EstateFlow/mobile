@@ -12,6 +12,6 @@ interface MessageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(list: List<MessageEntity>)
 
-    @Query("SELECT * FROM messageentity ORDER BY `index` DESC")
+    @Query("SELECT * FROM messageentity ORDER BY `index`")
     fun getAll(): Flow<List<MessageEntity>>
 }

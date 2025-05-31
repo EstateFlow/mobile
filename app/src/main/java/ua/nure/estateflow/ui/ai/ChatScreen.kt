@@ -63,7 +63,7 @@ fun ChatListScreen(
                 }
 
                 Chat.Event.OnBack -> {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }
 
                 is Chat.Event.OnScrollToLast -> {
@@ -114,7 +114,7 @@ private fun ChatScreenContent(
                 ),
             state = listState,
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimension.SmallSpace),
-            reverseLayout = true
+//            reverseLayout = true
         ) {
             items(items = state.messages, key = {it.id}) {
                 ChatItem(
