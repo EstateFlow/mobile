@@ -41,6 +41,7 @@ import androidx.credentials.PasswordCredential
 import androidx.credentials.PublicKeyCredential
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -49,6 +50,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ua.nure.estateflow.R
 import ua.nure.estateflow.config.WEB_CLIENT_ID
+import ua.nure.estateflow.navigation.NestedGraph
 import ua.nure.estateflow.navigation.Screen
 import ua.nure.estateflow.ui.components.EFButton
 import ua.nure.estateflow.ui.components.EFTextField
@@ -71,8 +73,11 @@ fun SignInScreen(
             when(it) {
                 is SignIn.Event.OnMessage -> Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 is SignIn.Event.OnNavigate -> {
-                    Log.d(TAG, "SignInScreen: ${it.destination}")
-                    navController.navigate(it.destination)
+                    navController.navigate(it.destination) {
+                        if(it.destination == Screen.Main.List) {
+                            popUpTo(0)
+                        }
+                    }
                 }
             }
         }
