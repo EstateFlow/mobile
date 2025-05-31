@@ -15,6 +15,7 @@ import ua.nure.estateflow.config.WEB_CLIENT_ID
 import ua.nure.estateflow.data.datasource.DataSourceResponse
 import ua.nure.estateflow.data.datasource.auth.AuthDataSource
 import ua.nure.estateflow.navigation.Screen
+import ua.nure.estateflow.ui.signin.SignIn.Event.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +34,7 @@ class SignInViewModel @Inject constructor(
                 password = state.value.password
             )
             is SignIn.Action.OnNavigate -> {
-                _event.emit(SignIn.Event.OnNavigate(destination = action.destination))
+                _event.emit(OnNavigate(destination = action.destination))
             }
             is SignIn.Action.onLoginChanged -> {
                 _state.update {
@@ -49,9 +50,10 @@ class SignInViewModel @Inject constructor(
                     )
                 }
             }
-            SignIn.Action.OnGoogleLogin -> {
-            }
-
+            is SignIn.Action.OnGoogleLogin -> onGoogleLogin(
+                idToken = action.idToken,
+                email = action.email
+            )
         }
     }
 
@@ -86,7 +88,34 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    private fun onGoogleLogin() {
-
+    private fun onGoogleLogin(idToken: String, email: String) {
+        viewModelScope.launch {
+            authDataSource.signInGoogle(
+                idToken = idToken,
+                email = email
+            ).collect {
+                when(it) {
+                    is DataSourceResponse.Error<*> -> {
+                        _state.update {
+                            it.copy(inProgress = false)
+                        }
+                        it.message?.let {
+                            _event.emit(SignIn.Event.OnMessage(message = it))
+                        }
+                    }
+                    DataSourceResponse.InProgress -> {
+                        _state.update {
+                            it.copy(inProgress = true)
+                        }
+                    }
+                    is DataSourceResponse.Success<*> -> {
+                        _state.update {
+                            it.copy(inProgress = false)
+                        }
+                        _event.emit(SignIn.Event.OnNavigate(destination = Screen.Main.List))
+                    }
+                }
+            }
+        }
     }
 }

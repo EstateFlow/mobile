@@ -7,6 +7,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import ua.nure.estateflow.data.remote.auth.dto.AuthRequest
 import ua.nure.estateflow.data.remote.MessageDto
+import ua.nure.estateflow.data.remote.auth.dto.GoogleAuthRequest
 import ua.nure.estateflow.data.remote.auth.dto.ResetPasswordRequest
 import ua.nure.estateflow.data.remote.auth.dto.SignInResponse
 import ua.nure.estateflow.data.remote.auth.dto.UpdateUserDto
@@ -22,6 +23,11 @@ interface AuthApi {
     @POST("/api/auth/login")
     suspend fun signIn(
         @Body body: AuthRequest
+    ): Response<SignInResponse>
+
+    @POST("/api/auth/google")
+    suspend fun signInGoogle(
+        @Body body: GoogleAuthRequest
     ): Response<SignInResponse>
 
     @GET("/api/user")

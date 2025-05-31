@@ -32,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -230,6 +231,15 @@ fun SignInScreenContent(
 //                                        idToken.getPayload().getSubject()
 
                                         Log.d(TAG, "SignInScreenContent: Google idToken: ${googleIdTokenCredential.idToken}")
+                                        Log.d(TAG, "SignInScreenContent: Google credential: ${googleIdTokenCredential.id}")
+                                        onAction(
+                                            SignIn.Action.OnGoogleLogin(
+                                                idToken = googleIdTokenCredential.idToken,
+                                                email = googleIdTokenCredential.id
+                                            )
+                                        )
+
+
 
                                     } catch (ex: GoogleIdTokenParsingException) {
                                         Log.e(TAG, "SignInScreenContent: Received an invalid google id token response", ex)
@@ -243,8 +253,6 @@ fun SignInScreenContent(
                             }
 
                         }
-
-
 
                     } catch (ex: Exception) {
                         ex.printStackTrace()

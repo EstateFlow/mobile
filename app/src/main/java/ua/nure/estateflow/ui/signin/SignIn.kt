@@ -11,7 +11,7 @@ object SignIn {
 
     sealed interface Action {
         data object OnLogin : Action
-        data object OnGoogleLogin : Action
+        data class OnGoogleLogin(val idToken: String, val email: String) : Action
         data class onLoginChanged(val login: String) : Action
         data class onPasswordChanged(val password: String) : Action
         data class OnNavigate(val destination: Screen): Action

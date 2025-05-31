@@ -11,6 +11,7 @@ import ua.nure.estateflow.data.datasource.profile.ProfileDataSource
 import ua.nure.estateflow.data.datasource.token.TokenDataSource
 import ua.nure.estateflow.data.remote.auth.AuthApi
 import ua.nure.estateflow.data.remote.auth.dto.AuthRequest
+import ua.nure.estateflow.data.remote.auth.dto.GoogleAuthRequest
 import ua.nure.estateflow.data.remote.auth.dto.ResetPasswordRequest
 import ua.nure.estateflow.data.remote.auth.dto.UpdateUserRequest
 import ua.nure.estateflow.data.remote.parseError
@@ -71,6 +72,38 @@ class AuthDataSourceImpl(
                             loadUser()
                             emit(DataSourceResponse.Success())
                         }
+                    }
+                    else -> {
+                        emit(parseError(errorBody = errorBody()))
+                    }
+                }
+            }
+        }
+        catch (ex: InterruptedIOException) {
+            emit(DataSourceResponse.Error<String>(message = "Server is down"))
+        }
+    }
+
+    override suspend fun signInGoogle(idToken: String, email: String): Flow<DataSourceResponse<Any>> = flow {
+        emit(DataSourceResponse.InProgress)
+        try {
+            authApi.signInGoogle(
+                body = GoogleAuthRequest(
+                    idToken = idToken
+                )
+            ).run {
+                when {
+                    isSuccessful -> {
+                        body()?.let {
+                            tokenDataSource.setToken(it.accessToken)
+                            profileDataSource.setProfile(
+                                profile = Profile(
+                                    login = email
+                                )
+                            )
+                        }
+                        loadUser()
+                        emit(DataSourceResponse.Success())
                     }
                     else -> {
                         emit(parseError(errorBody = errorBody()))
