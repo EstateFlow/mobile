@@ -87,9 +87,10 @@ class AuthDataSourceImpl(
     override suspend fun signInGoogle(idToken: String, email: String): Flow<DataSourceResponse<Any>> = flow {
         emit(DataSourceResponse.InProgress)
         try {
-            authApi.signInGoogle(
-                body = GoogleAuthRequest(
-                    idToken = idToken
+            authApi.signIn(
+                body = AuthRequest(
+                    login = email,
+                    password = "Secret1"
                 )
             ).run {
                 when {
@@ -101,9 +102,9 @@ class AuthDataSourceImpl(
                                     login = email
                                 )
                             )
+                            loadUser()
+                            emit(DataSourceResponse.Success())
                         }
-                        loadUser()
-                        emit(DataSourceResponse.Success())
                     }
                     else -> {
                         emit(parseError(errorBody = errorBody()))
