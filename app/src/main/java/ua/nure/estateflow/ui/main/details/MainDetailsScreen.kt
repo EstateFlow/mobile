@@ -1,6 +1,8 @@
 package ua.nure.estateflow.ui.main.details
 
 import android.content.Intent
+import android.location.Geocoder
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,6 +30,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -56,6 +62,9 @@ import ua.nure.estateflow.data.remote.property.dto.TransactionType
 import ua.nure.estateflow.ui.components.EFTitlebar
 import ua.nure.estateflow.ui.components.EfGalleryIndicator
 import ua.nure.estateflow.ui.theme.AppTheme
+import java.util.Locale
+
+private val TAG = "MainDetailsScreen"
 
 @Composable
 fun MainDetailsScreen(
@@ -99,10 +108,31 @@ private fun MainDetailsScreenContent(
         val context = LocalContext.current
         val shareMessage = stringResource(R.string.shareMessage)
 
-        val target = LatLng(50.45, 30.52)
+        var target by remember {
+            mutableStateOf(LatLng(50.45, 30.52))
+        }
         val cameraPositionState = rememberCameraPositionState {
             position = CameraPosition.fromLatLngZoom(target, 12F)
         }
+        LaunchedEffect(key1 = state.property?.propertyEntity?.address) {
+            target = state.property?.propertyEntity?.address?.let { addr ->
+                try {
+                    val geocoder = Geocoder(context, Locale.getDefault())
+                    val addresses = geocoder.getFromLocationName(addr, 1)
+                    if (!addresses.isNullOrEmpty()) {
+                        val location = addresses[0]
+                        LatLng(location.latitude, location.longitude)
+                    } else {
+                        null
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    null
+                }
+            } ?: LatLng(50.45, 30.52)
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(target, 12F)
+        }
+
 
         EFTitlebar(
             isBackEnabled = true,
