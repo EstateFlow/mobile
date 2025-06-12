@@ -40,6 +40,7 @@
     <string name="username">User name</string>
     <string name="bio">Bio</string>
     <string name="save">Save</string>
+    <string name="location">Location</string>
 
     <plurals name="roomsPostfix">
         <item quantity="one">%d room</item>

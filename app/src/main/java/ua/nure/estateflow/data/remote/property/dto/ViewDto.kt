@@ -7,7 +7,6 @@ data class ViewDto(
     @SerializedName("id") val id : String,
     @SerializedName("propertyId") val propertyId : String,
     @SerializedName("viewedAt") val viewedAt : String,
-    @SerializedName("viewerIp") val viewerIp : String,
 )
 
 fun ViewDto.toEntity() =
@@ -15,5 +14,4 @@ fun ViewDto.toEntity() =
         id = id,
         propertyId = propertyId,
         viewedAt = viewedAt,
-        viewerIp = viewerIp,
         )

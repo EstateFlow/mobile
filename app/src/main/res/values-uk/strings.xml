@@ -37,10 +37,11 @@
     <string name="shareMessage">Оберіть</string>
     <string name="haveAnAccount">Маєте аккаунт?</string>
     <string name="backToLogin">Повернутись до входу</string>
-    <string name="avatar">Avatar</string>
-    <string name="username">User name</string>
+    <string name="avatar">Аватар</string>
+    <string name="username">Ім\'я</string>
     <string name="bio">Bio</string>
-    <string name="save">Save</string>
+    <string name="save">Зберегти</string>
+    <string name="location">Розташування</string>
 
     <plurals name="roomsPostfix">
         <item quantity="one">%d кімната</item>

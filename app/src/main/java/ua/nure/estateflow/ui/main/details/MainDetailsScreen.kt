@@ -44,6 +44,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 import ua.nure.estateflow.R
 import ua.nure.estateflow.data.remote.property.dto.PropertyType
 import ua.nure.estateflow.data.remote.property.dto.TransactionType
@@ -92,6 +98,11 @@ private fun MainDetailsScreenContent(
         val galleryState = rememberLazyListState()
         val context = LocalContext.current
         val shareMessage = stringResource(R.string.shareMessage)
+
+        val target = LatLng(50.45, 30.52)
+        val cameraPositionState = rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(target, 12F)
+        }
 
         EFTitlebar(
             isBackEnabled = true,
@@ -310,6 +321,31 @@ private fun MainDetailsScreenContent(
                     text = prop.owner.email,
                     style = AppTheme.typography.regularTextStyle
                 )
+                Text(
+                    modifier = Modifier
+                        .padding(
+                            top = AppTheme.dimension.NormalSpace,
+                            start = AppTheme.dimension.SmallSpace
+                        ),
+                    text = stringResource(R.string.location),
+                    style = AppTheme.typography.regularTextStyle
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                ){
+                    GoogleMap(
+                        modifier = Modifier.fillMaxSize(),
+                        cameraPositionState = cameraPositionState
+                    ) {
+                        Marker (
+                            state = MarkerState(position = target),
+                            title = state.property.propertyEntity.title
+                        )
+                    }
+                }
 
                 Box(modifier = Modifier.size(50.dp))
 

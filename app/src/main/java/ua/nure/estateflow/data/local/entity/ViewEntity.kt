@@ -19,5 +19,4 @@ data class ViewEntity(
     @PrimaryKey val id : String,
     val propertyId : String,
     val viewedAt : String,
-    val viewerIp : String,
 )

@@ -21,6 +21,7 @@ coil = "3.0.0-rc02"
 credentials = "1.5.0"
 googleid = "1.1.1"
 googleSignin = "20.7.0"
+mapsComposeVersion = "4.4.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +59,10 @@ credentials = {group = "androidx.credentials", name = "credentials", version.ref
 credentials-play = {group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials"}
 googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
 google-signin = {group = "com.google.android.gms", name = "play-services-auth", version.ref="googleSignin"}
+maps = {group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsComposeVersion"}
+maps-utils = {group = "com.google.maps.android", name = "maps-compose-utils", version.ref = "mapsComposeVersion"}
+maps-widgets = {group = "com.google.maps.android", name = "maps-compose-widgets", version.ref = "mapsComposeVersion"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

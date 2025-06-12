@@ -103,6 +103,11 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
 
+//    Google maps
+    implementation(libs.maps)
+    implementation(libs.maps.utils)
+    implementation(libs.maps.widgets)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
